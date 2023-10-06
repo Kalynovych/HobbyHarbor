@@ -40,6 +40,7 @@ It is a project of social media where you can find people with common interests 
    - Reply to comment
 
 Described features and a few more are visualized on the use-case diagram for better understanding.
+![Visual_Paradigm_l7VDewa217](https://github.com/Kalynovych/HobbyHarbor/assets/92263512/a6f77888-9aaf-41c6-b43b-4e042204a75b)
 
 ![Use case diagram](https://github.com/Kalynovych/HobbyHarbor/assets/92263512/b94a7674-6325-43ab-95a5-a36546a080de)
 
