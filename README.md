@@ -1,32 +1,32 @@
 # HobbyHarbor
 It is a project of social media where you can find people with common interests and chat with them, either in private dialog or group chat. Also, you can read posts about interesting themes or even write your own about your hobby.
 ## The project includes the next features:
-**1. Account manipulations**
+1. **Account manipulations**
    - Create account
    - Edit profile
    - Login
    - Logout
    - Delete account
-**2. Edit user's interests**
+2. **Edit user's interests**
    - Add interest
    - Delete interest
-**3. Search for people**
+3. **Search for people**
    - View profile
    - Like profile
    - Skip profile
    - Write private message
-**4. Open chat**
+4. **Open chat**
    - Write message
    - Read message
    - Edit message
    - Delete message
    - Reply to message
-**5. Open group chats page**
+5. **Open group chats page**
    - Create group chat
    - Invite user
    - Set chat theme
    - Delete group chat
-**6. Open post page**
+6. **Open post page**
    - Create post
    - Read post
    - Edit post
