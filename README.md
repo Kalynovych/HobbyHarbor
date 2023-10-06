@@ -1,6 +1,6 @@
 # HobbyHarbor
 It is a project of social media where you can find people with common interests and chat with them, either in private dialog or group chat. Also, you can read posts about interesting themes or even write your own about your hobby.
-##The project includes the next features:
+## The project includes the next features:
 1. Account manipulations
  - Create account
  - Edit profile
@@ -8,8 +8,8 @@ It is a project of social media where you can find people with common interests 
  - Logout
  - Delete account
 1. Edit user's interests
-   - Add interest
-   - Delete interest
+ - Add interest
+ - Delete interest
 1. Search for people
  - View profile
  - Like profile
@@ -40,7 +40,9 @@ It is a project of social media where you can find people with common interests 
  - Reply to comment
 
 Described features and a few more are visualized on the use-case diagram for better understanding.
+
 ![Use case diagram](https://github.com/Kalynovych/HobbyHarbor/assets/92263512/b94a7674-6325-43ab-95a5-a36546a080de)
 
 Necessary entities and their relationships are visualized on the ER-diagram.
+
 ![ERD](https://github.com/Kalynovych/HobbyHarbor/assets/92263512/cb8bdcff-9d32-4440-823a-ac02c1344e9c)
