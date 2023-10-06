@@ -8,36 +8,36 @@ It is a project of social media where you can find people with common interests 
    - Logout
    - Delete account
 2. Edit user's interests
-  - Add interest
-  - Delete interest
+   - Add interest
+   - Delete interest
 3. Search for people
- - View profile
- - Like profile
- - Skip profile
- - Write private message
+   - View profile
+   - Like profile
+   - Skip profile
+   - Write private message
 4. Open chat
- - Write message
- - Read message
- - Edit message
- - Delete message
- - Reply to message
+   - Write message
+   - Read message
+   - Edit message
+   - Delete message
+   - Reply to message
 5. Open group chats page
- - Create group chat
- - Invite user
- - Set chat theme
- - Delete group chat
+   - Create group chat
+   - Invite user
+   - Set chat theme
+   - Delete group chat
 6. Open post page
- - Create post
- - Read post
- - Edit post
- - Delete post
- - Like post
- - Dislike post
- - Write comment
- - Read comment
- - Edit comment
- - Delete comment
- - Reply to comment
+   - Create post
+   - Read post
+   - Edit post
+   - Delete post
+   - Like post
+   - Dislike post
+   - Write comment
+   - Read comment
+   - Edit comment
+   - Delete comment
+   - Reply to comment
 
 Described features and a few more are visualized on the use-case diagram for better understanding.
 
