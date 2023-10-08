@@ -8,7 +8,7 @@ namespace HobbyHarbor.Core.Entities
 {
     public class Interest
     {
-        public int InterestId { get; set; }
+        public int Id { get; set; }
 
         public int CategoryId { get; set; }
 
@@ -16,10 +16,10 @@ namespace HobbyHarbor.Core.Entities
 
         public string Title { get; set; }
 
-        public IEnumerable<UserInterest>? UserInterests { get; set; }
+        public ICollection<UserInterest>? UserInterests { get; set; }
 
-        public IEnumerable<PostInterest>? PostInterests { get; set; }
+        public ICollection<PostInterest>? PostInterests { get; set; }
 
-        public IEnumerable<PublicChatInterest>? PublicChatInterests { get; set; }
+        public ICollection<PublicChatInterest>? PublicChatInterests { get; set; }
     }
 }

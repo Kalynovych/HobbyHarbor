@@ -8,25 +8,25 @@ namespace HobbyHarbor.Core.Entities
 {
     public class Post
     {
-        public int PostId { get; set; }
+        public int Id { get; set; }
 
         public int CreatorId { get; set; }
 
         public User Creator { get; set; }
 
-        public IEnumerable<PostInterest> PostInterests { get; set; } = Enumerable.Empty<PostInterest>();
+        public ICollection<PostInterest> PostInterests { get; set; }
 
         public int Likes { get; set; }
 
         public int Dislikes { get; set; }
 
-        public IEnumerable<Comment>? Comments { get; set; }
+        public ICollection<Comment>? Comments { get; set; }
 
         public string PostTitle { get; set; }
 
         public string PostContent { get; set; }
 
-        public string? PathToAttachment { get; set; }
+        public string? Attachment { get; set; }
 
         public int AttachmentTypeId { get; set; }
 

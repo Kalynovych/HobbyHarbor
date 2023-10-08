@@ -10,10 +10,12 @@ namespace HobbyHarbor.Core.Entities
     {
         public int UserId { get; set; }
 
+        public int PublicChatId { get; set; }
+        
         public User User { get; set; }
 
-        public int PublicChatId { get; set; }
-
         public PublicChat PublicChat { get; set; }
+
+        public bool IsAuthor { get; set; }
     }
 }

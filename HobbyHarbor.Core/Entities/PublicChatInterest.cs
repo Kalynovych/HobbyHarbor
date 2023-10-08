@@ -10,9 +10,9 @@ namespace HobbyHarbor.Core.Entities
     {
         public int PublicChatId { get; set; }
 
-        public PublicChat PublicChat { get; set; }
-
         public int InterestId { get; set; }
+        
+        public PublicChat PublicChat { get; set; }
 
         public Interest Interest { get; set; }
     }

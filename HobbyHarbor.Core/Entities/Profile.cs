@@ -8,7 +8,7 @@ namespace HobbyHarbor.Core.Entities
 {
     public class Profile
     {
-        public int ProfileId { get; set; }
+        public int Id { get; set; }
 
         public int UserId { get; set; }
 
@@ -28,6 +28,6 @@ namespace HobbyHarbor.Core.Entities
 
         public string? About { get; set; }
 
-        public IEnumerable<ProfileImage>? Images { get; set; }
+        public ICollection<ProfileImage>? Images { get; set; }
     }
 }

@@ -1,11 +1,14 @@
+using HobbyHarbor.Infrastructure;
+using HobbyHarbor.Infrastructure.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddStorage(builder.Configuration);
 
 var app = builder.Build();
+await app.CreateDatabase();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");

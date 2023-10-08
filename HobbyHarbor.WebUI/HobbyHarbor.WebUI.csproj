@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HobbyHarbor.Infrastructure\HobbyHarbor.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

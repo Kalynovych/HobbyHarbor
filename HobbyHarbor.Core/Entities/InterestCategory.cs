@@ -8,10 +8,10 @@ namespace HobbyHarbor.Core.Entities
 {
     public class InterestCategory
     {
-        public int InterestCategoryId {  get; set; }
+        public int Id {  get; set; }
 
         public string CategoryName { get; set; }
 
-        public IEnumerable<Interest> Interests { get; set; }
+        public ICollection<Interest> Interests { get; set; }
     }
 }

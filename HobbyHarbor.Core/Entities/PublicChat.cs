@@ -8,17 +8,13 @@ namespace HobbyHarbor.Core.Entities
 {
     public class PublicChat
     {
-        public int PublicChatId { get; set; }
+        public int Id { get; set; }
 
-        public IEnumerable<UsersPublicChat>? Participants { get; set; }
+        public ICollection<UsersPublicChat>? Participants { get; set; }
 
-        public IEnumerable<Interest> ChatInterests { get; set; } = Enumerable.Empty<Interest>();
+        public ICollection<PublicChatInterest> ChatInterests { get; set; }
 
-        public IEnumerable<Message>? Messages { get; set; }
-
-        public int AuthorId { get; set; }
-
-        public User Author { get; set; }
+        public ICollection<Message>? Messages { get; set; }
 
         public string ChatTitle { get; set; }
     }

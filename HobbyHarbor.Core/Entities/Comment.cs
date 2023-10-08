@@ -8,7 +8,7 @@ namespace HobbyHarbor.Core.Entities
 {
     public class Comment
     {
-        public int CommentId { get; set; }
+        public int Id { get; set; }
 
         public int AuthorId { get; set; }
 
@@ -19,6 +19,8 @@ namespace HobbyHarbor.Core.Entities
         public int PostId { get; set; }
 
         public Post Post { get; set; }
+
+        public int ReplyMessageId { get; set; }
 
         public Comment? ReplyTo {  get; set; }
 

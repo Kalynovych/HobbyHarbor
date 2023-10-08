@@ -8,7 +8,7 @@ namespace HobbyHarbor.Core.Entities
 {
     public class User
     {
-        public int UserId { get; set; }
+        public int Id { get; set; }
 
         public string Username { get; set; }
 
@@ -20,18 +20,18 @@ namespace HobbyHarbor.Core.Entities
 
         public bool IsPremium { get; set; } = false;
 
-        public IEnumerable<UserChoice>? Choices { get; set; }
+        public ICollection<UserChoice>? Choices { get; set; }
 
-        public IEnumerable<PrivateChat>? PrivateChats { get; set; }
+        public ICollection<PrivateChat>? PrivateChats { get; set; }
 
-        public IEnumerable<UsersPublicChat>? PublicChats { get; set; }
+        public ICollection<UsersPublicChat>? PublicChats { get; set; }
 
-        public IEnumerable<Comment>? Comments { get; set; }
+        public ICollection<Comment>? Comments { get; set; }
 
-        public IEnumerable<Post>? Posts { get; set; }
+        public ICollection<Post>? Posts { get; set; }
 
-        public IEnumerable<Payment>? Payments { get; set; }
+        public ICollection<Payment>? Payments { get; set; }
 
-        public IEnumerable<UserInterest> UserInterests { get; set; }
+        public ICollection<UserInterest> UserInterests { get; set; }
     }
 }

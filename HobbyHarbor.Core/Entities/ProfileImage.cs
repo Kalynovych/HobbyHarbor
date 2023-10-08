@@ -8,12 +8,12 @@ namespace HobbyHarbor.Core.Entities
 {
     public class ProfileImage
     {
-        public int ProfileImageId { get; set; }
+        public int Id { get; set; }
 
         public int ProfileId { get; set; }
 
         public Profile Profile { get; set; }
         
-        public string PathToImage { get; set; }
+        public string Image { get; set; }
     }
 }

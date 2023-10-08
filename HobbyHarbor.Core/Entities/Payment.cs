@@ -8,7 +8,7 @@ namespace HobbyHarbor.Core.Entities
 {
     public class Payment
     {
-        public int PaymentId { get; set; }
+        public int Id { get; set; }
 
         public int UserId { get; set; }
 
