@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using HobbyHarbor.Core.Entities;
 
@@ -18,6 +13,11 @@ namespace HobbyHarbor.Infrastructure.Data.Configuration
             builder.HasOne(x => x.Post)
                 .WithMany(x => x.Comments)
                 .HasForeignKey(x => x.PostId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasOne(x => x.ReplyTo)
+                .WithMany()
+                .HasForeignKey(x => x.ReplyCommentId)
                 .OnDelete(DeleteBehavior.NoAction);
         }
     }

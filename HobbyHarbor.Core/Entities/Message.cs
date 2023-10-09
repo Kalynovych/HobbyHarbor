@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HobbyHarbor.Core.Entities
+﻿namespace HobbyHarbor.Core.Entities
 {
     public class Message
     {
@@ -12,9 +6,13 @@ namespace HobbyHarbor.Core.Entities
 
         public string MessageText { get; set; }
 
+        public int MessageAuthorId { get; set; }
+
+        public User MessageAuthor { get; set; }
+
         public DateTime Time { get; set; }
 
-        public int ReplyMessageId { get; set; }
+        public int? ReplyMessageId { get; set; }
 
         public Message? ReplyTo { get; set; }
 
@@ -22,17 +20,17 @@ namespace HobbyHarbor.Core.Entities
 
         public string? Attachment { get; set; }
 
-        public int AttachmentTypeId { get; set; }
+        public int? AttachmentTypeId { get; set; }
 
         public AttachmentType? AttachmentType { get; set; }
 
-        public int AuthorId { get; set; }
+        public int? CreatorId { get; set; }
 
-        public int CompanionId { get; set; }
+        public int? CompanionId { get; set; }
 
         public PrivateChat? PrivateChat { get; set; }
 
-        public int PublicChatId { get; set; }
+        public int? PublicChatId { get; set; }
 
         public PublicChat? PublicChat { get; set; }
     }

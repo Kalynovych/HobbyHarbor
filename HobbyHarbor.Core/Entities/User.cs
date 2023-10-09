@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HobbyHarbor.Core.Entities
+﻿namespace HobbyHarbor.Core.Entities
 {
     public class User
     {
@@ -21,6 +15,8 @@ namespace HobbyHarbor.Core.Entities
         public bool IsPremium { get; set; } = false;
 
         public ICollection<UserChoice>? Choices { get; set; }
+
+        public ICollection<Message> Messages { get; set; }
 
         public ICollection<PrivateChat>? PrivateChats { get; set; }
 

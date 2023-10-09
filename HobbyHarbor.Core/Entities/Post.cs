@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HobbyHarbor.Core.Entities
+﻿namespace HobbyHarbor.Core.Entities
 {
     public class Post
     {
@@ -28,7 +22,7 @@ namespace HobbyHarbor.Core.Entities
 
         public string? Attachment { get; set; }
 
-        public int AttachmentTypeId { get; set; }
+        public int? AttachmentTypeId { get; set; }
 
         public AttachmentType? AttachmentType { get; set; }
 

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HobbyHarbor.Core.Entities
+﻿namespace HobbyHarbor.Core.Entities
 {
     public class Comment
     {
@@ -20,7 +14,7 @@ namespace HobbyHarbor.Core.Entities
 
         public Post Post { get; set; }
 
-        public int ReplyMessageId { get; set; }
+        public int? ReplyCommentId { get; set; }
 
         public Comment? ReplyTo {  get; set; }
 

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HobbyHarbor.Core.Entities;
+﻿using HobbyHarbor.Core.Entities;
 using HobbyHarbor.Application.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -50,6 +45,7 @@ namespace HobbyHarbor.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(HobbyHarborDbContext).Assembly);
+            modelBuilder.Seed();
 
             base.OnModelCreating(modelBuilder);
         }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HobbyHarbor.Core.Entities;
+﻿using HobbyHarbor.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -41,8 +36,8 @@ namespace HobbyHarbor.Infrastructure.Data.Configuration
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasMany(x => x.PrivateChats)
-                .WithOne(x => x.Author)
-                .HasForeignKey(x => x.AuthorId)
+                .WithOne(x => x.Creator)
+                .HasForeignKey(x => x.CreatorId)
                 .OnDelete(DeleteBehavior.NoAction);
         }
     }

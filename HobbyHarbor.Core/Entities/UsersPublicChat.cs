@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HobbyHarbor.Core.Entities
+﻿namespace HobbyHarbor.Core.Entities
 {
     public class UsersPublicChat
     {
@@ -16,6 +10,6 @@ namespace HobbyHarbor.Core.Entities
 
         public PublicChat PublicChat { get; set; }
 
-        public bool IsAuthor { get; set; }
+        public bool IsCreator { get; set; }
     }
 }

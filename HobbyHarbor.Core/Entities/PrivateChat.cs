@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HobbyHarbor.Core.Entities
+﻿namespace HobbyHarbor.Core.Entities
 {
     public class PrivateChat
     {
-        public int AuthorId { get; set; }
+        public int CreatorId { get; set; }
 
         public int CompanionId { get; set; }
 
-        public User Author { get; set; }
+        public User Creator { get; set; }
 
         public User Companion { get; set; }
 
