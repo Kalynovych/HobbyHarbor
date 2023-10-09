@@ -45,5 +45,6 @@ Described features and a few more are visualized on the use-case diagram for bet
 
 Necessary entities and their relationships are visualized on the ER-diagram.
 
-![ERD](https://github.com/Kalynovych/HobbyHarbor/assets/92263512/f666f273-6dd6-42f2-835c-425603f8c2be)
+![ERD](https://github.com/Kalynovych/HobbyHarbor/assets/92263512/cd37c9a9-15fa-40f5-92e1-88e968a776e7)
+
 
