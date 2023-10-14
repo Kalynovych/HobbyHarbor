@@ -1,0 +1,21 @@
+﻿@model CommentViewModel
+
+<div>
+	<div>
+		<img src="data:image/jpg;base64,@Model.ProfileImage.Image" />
+		<h2>@Model.Name @Model.Surname</h2>
+		<p>Reply</p>
+	</div>
+	<a>@Model.Text</a>
+	<div>
+		<div>
+			<img src="~/images/like.png" />
+			<p>@Model.Likes</p>
+		</div>
+		<div>
+			<img src="~/images/Dislike.png" />
+			<p>@Model.Dislikes</p>
+		</div>
+		<p>@Model.Time.ToShortTimeString()</p>
+	</div>
+</div>

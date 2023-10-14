@@ -1,0 +1,67 @@
+﻿@model PostViewModel
+
+<div>
+	<div>
+		<img src="data:image/jpg;base64,@Model.ProfileImage.Image" />
+		<div>
+			<h2>@Model.Name @Model.Surname</h2>
+			<p>@Model.PublicationTime.ToShortTimeString()</p>
+			<div>
+				@foreach (var interest in Model.PostInterests)
+				{
+					<div>@interest.Title</div>
+				}
+			</div>
+		</div>
+	</div>
+	<div>
+		<h1>@Model.PostTitle</h1>
+		<div>
+			@if (Model.Attachment != null)
+			{
+				switch (Model.AttachmentType)
+				{
+					case "image":
+						<img src="data:image/jpg;base64,@Model.Attachment" />
+						break;
+					case "video":
+						<video controls>
+							<source type="video/mp4" src="data:video/mp4;base64,@Model.Attachment">
+						</video>
+						break;
+					case "audio":
+						<audio controls>
+							<source type="audio/mp3" src="data:audio/mp3;base64,@Model.Attachment">
+						</audio>
+						break;
+					default:
+						break;
+				}
+			}
+			<p>@Model.PostContent</p>
+		</div>
+		<div>
+			<div>
+				<img src="~/images/like.png" />
+				<p>@Model.Likes</p>
+			</div>
+			<div>
+				<img src="~/images/Dislike.png" />
+				<p>@Model.Dislikes</p>
+			</div>
+			<p>Comments: @Model.Comments.Count</p>
+		</div>
+		<div>
+			<form>
+				<input type="text" placeholder="Leave a comment" />
+				<button>Cancel</button>
+				<input type="submit" value="Comment" />
+			</form>
+			@foreach (var comment in Model.Comments)
+			{
+				<vc:comment model="comment"></vc:comment>
+			}
+			<button>Load More...</button>
+		</div>
+	</div>
+</div>

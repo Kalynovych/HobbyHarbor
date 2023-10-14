@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HobbyHarbor.WebUI", "HobbyHarbor.WebUI\HobbyHarbor.WebUI.csproj", "{11D71AE0-C093-43F1-8BCC-7428DE599CE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HobbyHarbor.WebUI", "HobbyHarbor.WebUI\HobbyHarbor.WebUI.csproj", "{11D71AE0-C093-43F1-8BCC-7428DE599CE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HobbyHarbor.Core", "HobbyHarbor.Core\HobbyHarbor.Core.csproj", "{4414F781-4E60-45E6-85DB-211D62D8714B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HobbyHarbor.Core", "HobbyHarbor.Core\HobbyHarbor.Core.csproj", "{4414F781-4E60-45E6-85DB-211D62D8714B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HobbyHarbor.Infrastructure", "HobbyHarbor.Infrastructure\HobbyHarbor.Infrastructure.csproj", "{BD4898FF-6EF7-4A9B-A8AF-610935780DF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HobbyHarbor.Infrastructure", "HobbyHarbor.Infrastructure\HobbyHarbor.Infrastructure.csproj", "{BD4898FF-6EF7-4A9B-A8AF-610935780DF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HobbyHarbor.Application", "HobbyHarbor.Application\HobbyHarbor.Application.csproj", "{CA8866BB-5C1D-4263-94D9-1537918EACA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HobbyHarbor.Application", "HobbyHarbor.Application\HobbyHarbor.Application.csproj", "{CA8866BB-5C1D-4263-94D9-1537918EACA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HobbyHarbor.Shared", "HobbyHarbor.Shared\HobbyHarbor.Shared.csproj", "{2F0A1A17-4685-4DAF-AEE3-0C4AEF17F08D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HobbyHarbor.Shared", "HobbyHarbor.Shared\HobbyHarbor.Shared.csproj", "{2F0A1A17-4685-4DAF-AEE3-0C4AEF17F08D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
