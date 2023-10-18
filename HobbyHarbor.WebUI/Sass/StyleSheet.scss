@@ -1,0 +1,384 @@
+﻿$base-color: #222831;
+$secondary-color: #393E46;
+$additional-color1: #171717;
+$additional-color2: #474E68;
+$button-color: #5C3B6F;
+$secondary-button-color: #9A1F40;
+$border-color: #EEEEEE;
+$text-color: #FBE0D8;
+$secondary-text-color: black;
+
+.hide {
+    display: none;
+}
+
+p, textarea {
+    color: $text-color;
+}
+
+h1, a, h2 {
+    color: $secondary-text-color;
+}
+
+body {
+    background-color: $secondary-color;
+}
+
+header {
+    nav {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+
+        padding: {
+            top: 10px;
+            bottom: 10px;
+            left: 50px;
+            right: 50px;
+        }
+    }
+
+    a {
+        text-decoration: none;
+        font-size: 20px;
+        padding-bottom: 3px;
+
+        margin: {
+            left: 20px;
+            right: 30px;
+        }
+
+        &:hover {
+            color: $additional-color1;
+            border-bottom: 3px solid $additional-color1;
+        }
+    }
+
+    div {
+        &:nth-child(2) {
+            margin-left: 50px;
+
+            a {
+                margin-right: 10px;
+            }
+        }
+    }
+}
+
+.header-logo {
+    font-size: 25px;
+    font-weight: 500;
+
+    &:hover {
+        color: black;
+        border: none;
+    }
+}
+
+.profile-section1 {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.profile-info {
+    &-block {
+        display: flex;
+    }
+
+    display: flex;
+    flex-direction: column;
+
+    h2 {
+        margin-top: 10px;
+        margin-bottom: 30px;
+    }
+}
+
+.profile-image {
+    height: auto;
+    width: 150px;
+    border: 3px solid $border-color;
+
+    margin: {
+        top: 20px;
+        left: 25px;
+        right: 15px;
+        bottom: 20px
+    }
+}
+
+.profile-banner-image {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+}
+
+.profile-activity-info {
+    margin-right: 50px;
+    margin-top: 20px;
+
+    p {
+        font-weight: 500;
+    }
+}
+
+.profile-gallery-image {
+    height: 200px;
+    width: auto;
+}
+
+.profile-gallery-button {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #b9b9b9;
+    margin: 0 15px; 
+    border: none;
+    cursor: pointer;
+
+    img {
+        height: 30px;
+        width: auto;
+    }
+}
+
+.profile-section2 {
+    background-color: $base-color;
+    padding-bottom: 20px;
+    margin: 20px 0;
+    padding-top: 10px;
+
+    h2, div {
+        width: fit-content;
+        margin: auto;
+    }
+
+    div {
+        background-color: $additional-color2;
+        padding: 20px 0;
+    }
+
+    h2 {
+        margin-bottom: 10px;
+    }
+}
+
+.profile-section3 {
+    padding: 10px;
+    background-color: $base-color;
+
+    > div {
+        display: flex;
+    }
+}
+
+.profile-posts {
+    flex-direction: column;
+}
+
+.post {
+    margin: 10px;
+    border: 2px solid $border-color;
+    border-radius: 20px 20px;
+}
+
+.post-write-button {
+    border: none;
+    border-radius: 10px 10px;
+    font-size: 20px;
+    margin-left: auto;
+    padding: 3px 10px;
+    background-color: $button-color;
+}
+
+.post-creator-container {
+    display: flex;
+    margin: 10px
+}
+
+.post-profile-image, .comment-profile-image {
+    height: 70px;
+    width: 70px;
+    border: 2px solid $border-color;
+    border-radius: 50%;
+}
+
+.post-info {
+    margin-left: 20px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.post-interests-container {
+    display: flex;
+}
+
+.post-interest {
+    border-radius: 10px 10px;
+    padding: 2px 7px;
+    margin: 0 2px;
+    color: $secondary-text-color;
+    background-color: white;
+}
+
+.post-publication-time {
+    font-size: 25px;
+}
+
+.post-title {
+    text-align: center;
+    font-size: 50px;
+    margin: 10px 0;
+}
+
+.post-content {
+    font-size: 30px;
+    margin: 10px 30px;
+}
+
+.post-bottom {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+    margin-bottom: 20px;
+
+    border: {
+        top: 1px solid $border-color;
+        bottom: 1px solid $border-color;
+    }
+}
+
+.reaction-container {
+    display: flex;
+}
+
+.reactions {
+    display: flex;
+    margin-right: 20px;
+    align-items: center;
+
+    img {
+        height: 25px;
+        width: auto;
+        margin-right: 10px;
+    }
+
+    p {
+        font-size: 20px;
+        margin: auto;
+    }
+}
+
+.post-comment-count {
+    font-size: 20px;
+    margin: auto 0;
+}
+
+.post-leave-comment-form {
+    margin: 0 10px;
+
+    textarea {
+        width: 100%;
+        height: 150px;
+        padding: 10px 10px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        background-color: $additional-color1;
+        font-size: 20px;
+        resize: none;
+    }
+}
+
+.post-leave-comment-buttons {
+    display: flex;
+    justify-content: end;
+    margin-top: 5px;
+
+    button, input[type=submit] {
+        background-color: $button-color;
+        border: none;
+        font-size: 20px;
+        padding: 3px 10px;
+        margin-left: 10px;
+        border-radius: 10px 10px;
+    }
+
+    button {
+        background-color: $secondary-button-color;
+    }
+}
+
+.comment {
+    border: 1px solid $border-color;
+    border-radius: 15px 15px;
+    padding: 10px;
+    width: 550px;
+
+    margin: {
+        top: 20px;
+        left: 15px;
+    }
+}
+
+.comment-profile-image {
+    height: 50px;
+    width: 50px;
+}
+
+.comment-author-container {
+    display: flex;
+
+    div {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-left: 10px;
+    }
+}
+
+.comment-reply {
+    font-size: 20px;
+}
+
+.comment-text {
+    font-size: 25px;
+
+    margin: {
+        left: 10px;
+        top: 7px;
+    }
+}
+
+.comment-bottom {
+    display: flex;
+    justify-content: space-between;
+}
+
+.comment-publication-time {
+    font-size: 20px;
+    margin: auto 0;
+}
+
+.post-load-more-wrapper {
+    display: flex;
+    margin: 15px;
+}
+
+.post-load-more-button {
+    background-color: $button-color;
+    border: none;
+    font-size: 25px;
+    padding: 5px 10px;
+    margin: auto;
+    border-radius: 10px 10px;
+}
+
+.footer-copyright {
+    margin: 10px 20px;
+    font-size: 20px;
+}

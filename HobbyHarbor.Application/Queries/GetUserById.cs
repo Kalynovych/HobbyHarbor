@@ -3,7 +3,7 @@ using MediatR;
 
 namespace HobbyHarbor.Application.Queries
 {
-	public class GetFullUserById : IRequest<User>
+	public class GetUserById : IRequest<User>
 	{
 		public int Id { get; set; }
 	}

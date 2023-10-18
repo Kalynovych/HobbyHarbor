@@ -5,6 +5,7 @@ using AutoMapper;
 using HobbyHarbor.Core.Entities;
 using MediatR;
 using HobbyHarbor.Application.Queries;
+using HobbyHarbor.WebUI.ViewComponents;
 
 namespace HobbyHarbor.WebUI.Controllers
 {
@@ -23,7 +24,8 @@ namespace HobbyHarbor.WebUI.Controllers
 
 		public IActionResult Index()
 		{
-			User user = _mediator.Send(new GetFullUserById { Id = 1 }).Result;
+			User user = _mediator.Send(new GetUserById { Id = 1 }).Result;
+			Post post = _mediator.Send(new GetPostByCreatorId { Id = 2 }).Result;
 			return View(_mapper.Map<ProfileViewModel>(user));
 		}
 
@@ -36,6 +38,14 @@ namespace HobbyHarbor.WebUI.Controllers
 		public IActionResult Error()
 		{
 			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+		}
+
+		[HttpGet]
+		public IActionResult GetComments([FromQuery]int postId)
+		{
+			IEnumerable<Comment> comments = _mediator.Send(new GetCommentsByPostId { Id = postId, Take = 2 }).Result;
+			var v = _mapper.Map<IEnumerable<CommentViewModel>>(comments);
+			return ViewComponent(typeof(CommentsListViewComponent), v);
 		}
 	}
 }

@@ -19,8 +19,7 @@
 			{
 				_logger.LogError(ex, ex.Message);
 
-				context.Response.ContentType = "text/html";
-				await context.Response.WriteAsync("<h2>An error occurred while processing your request.</h2>");
+				context.Response.Redirect("/Home/Error");
 			}
 		}
 	}

@@ -1,21 +1,25 @@
 ﻿@model CommentViewModel
 
-<div>
-	<div>
-		<img src="data:image/jpg;base64,@Model.ProfileImage.Image" />
-		<h2>@Model.Name @Model.Surname</h2>
-		<p>Reply</p>
+<div class="comment">
+	<div class="comment-author-container">
+		<img class="comment-profile-image" src="data:image/jpg;base64,@Model.ProfileImage.Image" />
+		<div>
+			<h2 class="profile-name">@Model.Name @Model.Surname</h2>
+			<p class="comment-reply">Reply</p>
+		</div>
 	</div>
-	<a>@Model.Text</a>
-	<div>
-		<div>
-			<img src="~/images/like.png" />
-			<p>@Model.Likes</p>
+	<p class="comment-text">@Model.Text</p>
+	<div class="comment-bottom">
+		<div class="reaction-container">
+			<div class="reactions">
+				<img src="~/images/like.png" />
+				<p>@Model.Likes</p>
+			</div>
+			<div class="reactions">
+				<img src="~/images/Dislike.png" />
+				<p>@Model.Dislikes</p>
+			</div>
 		</div>
-		<div>
-			<img src="~/images/Dislike.png" />
-			<p>@Model.Dislikes</p>
-		</div>
-		<p>@Model.Time.ToShortTimeString()</p>
+		<p class="comment-publication-time">@Model.Time.ToShortTimeString()</p>
 	</div>
 </div>

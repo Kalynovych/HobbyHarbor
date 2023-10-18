@@ -1,42 +1,6 @@
 ﻿@model ProfileViewModel
 
 <div>
-	<section>
-		<img src="data:image/jpg;base64,@Model.BannerImage.Image" alt="Profile Banner" />
-		<div>
-			<img src="data:image/jpg;base64,@Model.ProfileImage.Image" alt="Profile Image" />
-			<div>
-				<h2>@Model.Name @Model.Surname</h2>
-				<p>@Model.About</p>
-			</div>
-		</div>
-		<div>
-			<p>Public Chats: @Model.PublicChatsAmount</p>
-			<p>Private Chats: @Model.PrivateChatsAmount</p>
-			<p>Post Writed: @Model.Posts?.Count</p>
-		</div>
-	</section>
-	<section>
-		<div>left</div>
-		@foreach (var image in Model.GalleryImages)
-		{
-			<img src="data:image/jpg;base64,@image.Image" alt="image" />
-		}
-		<div>right</div>
-	</section>
-	<section>
-		<button>Write Post</button>
-		<div>
-			<select>
-				<option>Edit</option>
-				<option>Delete</option>
-			</select>
-			<div>
-				@foreach (var post in Model.Posts)
-				{
-					<vc:post model="post"></vc:post>
-				}
-			</div>
-		</div>
-	</section>
+	<vc:profile model="@Model"></vc:profile>
+	
 </div>

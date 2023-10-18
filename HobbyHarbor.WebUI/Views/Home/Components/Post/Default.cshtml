@@ -1,22 +1,30 @@
 ﻿@model PostViewModel
 
-<div>
-	<div>
-		<img src="data:image/jpg;base64,@Model.ProfileImage.Image" />
-		<div>
-			<h2>@Model.Name @Model.Surname</h2>
-			<p>@Model.PublicationTime.ToShortTimeString()</p>
+<div class="post">
+	<div class="post-creator-container">
+		<img class="post-profile-image" src="data:image/jpg;base64,@Model.ProfileImage.Image" />
+		<div class="post-info">
 			<div>
-				@foreach (var interest in Model.PostInterests)
-				{
-					<div>@interest.Title</div>
-				}
+				<h2 class="profile-name">@Model.Name @Model.Surname</h2>
+				<div class="post-interests-container">
+					@foreach (var interest in Model.PostInterests)
+					{
+						<div class="post-interest">@interest.Title</div>
+					}
+				</div>
 			</div>
+			<p class="post-publication-time">@Model.PublicationTime.ToShortTimeString()</p>
+		</div>
+		<div class="post-dropdown-container">
+			<ul class="post-options-dropdown hide">
+				<li>Edit</li>
+				<li>Delete</li>
+			</ul>
 		</div>
 	</div>
 	<div>
-		<h1>@Model.PostTitle</h1>
-		<div>
+		<h1 class="post-title">@Model.PostTitle</h1>
+		<div class="post-attachment">
 			@if (Model.Attachment != null)
 			{
 				switch (Model.AttachmentType)
@@ -38,30 +46,33 @@
 						break;
 				}
 			}
-			<p>@Model.PostContent</p>
+			<p class="post-content">@Model.PostContent</p>
 		</div>
-		<div>
-			<div>
-				<img src="~/images/like.png" />
-				<p>@Model.Likes</p>
+		<div class="post-bottom">
+			<div class="reaction-container">
+				<div class="reactions">
+					<img src="~/images/like.png" />
+					<p>@Model.Likes</p>
+				</div>
+				<div class="reactions">
+					<img src="~/images/Dislike.png" />
+					<p>@Model.Dislikes</p>
+				</div>
 			</div>
-			<div>
-				<img src="~/images/Dislike.png" />
-				<p>@Model.Dislikes</p>
-			</div>
-			<p>Comments: @Model.Comments.Count</p>
+			<p id="openComments" class="post-comment-count">Comments: @Model.Comments.Count</p>
 		</div>
-		<div>
-			<form>
-				<input type="text" placeholder="Leave a comment" />
-				<button>Cancel</button>
-				<input type="submit" value="Comment" />
+		<div id="commentSection" class="post-comment-section hide">
+			<form class="post-leave-comment-form">
+				<textarea placeholder="Leave a comment"></textarea>
+				<div class="post-leave-comment-buttons">
+					<button>Cancel</button>
+					<input type="submit" value="Comment" />
+				</div>
 			</form>
-			@foreach (var comment in Model.Comments)
-			{
-				<vc:comment model="comment"></vc:comment>
-			}
-			<button>Load More...</button>
+			<div id ="commentsContainer"></div>
+			<div class="post-load-more-wrapper">
+				<button class="post-load-more-button">Load More...</button>
+			</div>
 		</div>
 	</div>
 </div>

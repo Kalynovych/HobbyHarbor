@@ -52,7 +52,7 @@ namespace HobbyHarbor.Infrastructure.Data
         {
             builder.Entity<Comment>().HasData(
                 new Comment { Id = 1, AuthorId = 1, Dislikes = 10, Likes = 15, PostId = 1, Text = "comment text1", Time = DateTime.Now },
-                new Comment { Id = 2, AuthorId = 2, Dislikes = 10, Likes = 15, PostId = 2, Text = "comment text2", Time = DateTime.Now },
+                new Comment { Id = 2, AuthorId = 2, Dislikes = 10, Likes = 15, PostId = 1, Text = "comment text2", Time = DateTime.Now },
                 new Comment { Id = 3, AuthorId = 1, Dislikes = 10, Likes = 15, PostId = 2, Text = "comment text3", ReplyCommentId = 2, Time = DateTime.Now });
         }
 
@@ -92,8 +92,8 @@ namespace HobbyHarbor.Infrastructure.Data
         {
             builder.Entity<Post>().HasData(
                 new Post { Id = 1, AttachmentTypeId = 1, CreatorId = 1, Dislikes = 50, Likes = 17, PostContent = "post content1", PostTitle = "title1", PublicationTime = DateTime.Now },
-                new Post { Id = 2, AttachmentTypeId = 2, CreatorId = 2, Dislikes = 50, Likes = 17, PostContent = "post content2", PostTitle = "title2", PublicationTime = DateTime.Now },
-                new Post { Id = 3, CreatorId = 3, Dislikes = 50, Likes = 17, PostContent = "post content3", PostTitle = "title3", PublicationTime = DateTime.Now });
+                new Post { Id = 2, AttachmentTypeId = 2, CreatorId = 1, Dislikes = 50, Likes = 17, PostContent = "post content2", PostTitle = "title2", PublicationTime = DateTime.Now },
+                new Post { Id = 3, CreatorId = 2, Dislikes = 50, Likes = 17, PostContent = "post content3", PostTitle = "title3", PublicationTime = DateTime.Now });
         }
 
         private static void SeedPostInterests(ModelBuilder builder)
@@ -115,11 +115,11 @@ namespace HobbyHarbor.Infrastructure.Data
         private static void SeedProfiles(ModelBuilder builder)
         {
             builder.Entity<Profile>().HasData(
-                new Profile { Id = 1, UserId = 1, About = "about1", Age = 20, Birthdate = DateTime.Now, Country = "Ukraine", Name = "Name", Sex = "male", Surname = "Surname" },
-                new Profile { Id = 2, UserId = 2, About = "about2", Age = 21, Birthdate = DateTime.Now, Country = "Ukraine", Name = "Name", Sex = "female", Surname = "Surname" },
-                new Profile { Id = 3, UserId = 3, About = "about3", Age = 30, Birthdate = DateTime.Now, Country = "Ukraine", Name = "Name", Sex = "male" },
-                new Profile { Id = 4, UserId = 4, About = "about4", Age = 25, Birthdate = DateTime.Now, Country = "Ukraine", Name = "Name", Sex = "female" },
-                new Profile { Id = 5, UserId = 5, About = "about5", Age = 18, Birthdate = DateTime.Now, Country = "Ukraine", Name = "Name", Sex = "male", Surname = "Surname" });
+                new Profile { Id = 1, UserId = 1, About = "about1", Age = 20, Birthdate = DateTime.Now, Country = "Ukraine", Name = "Name1", Sex = "male", Surname = "Surname" },
+                new Profile { Id = 2, UserId = 2, About = "about2", Age = 21, Birthdate = DateTime.Now, Country = "Ukraine", Name = "Name2", Sex = "female", Surname = "Surname" },
+                new Profile { Id = 3, UserId = 3, About = "about3", Age = 30, Birthdate = DateTime.Now, Country = "Ukraine", Name = "Name3", Sex = "male" },
+                new Profile { Id = 4, UserId = 4, About = "about4", Age = 25, Birthdate = DateTime.Now, Country = "Ukraine", Name = "Name4", Sex = "female" },
+                new Profile { Id = 5, UserId = 5, About = "about5", Age = 18, Birthdate = DateTime.Now, Country = "Ukraine", Name = "Name5", Sex = "male", Surname = "Surname" });
         }
 
         private static void SeedProfileImages(ModelBuilder builder)
@@ -128,7 +128,10 @@ namespace HobbyHarbor.Infrastructure.Data
             builder.Entity<ProfileImage>().HasData(
                 new ProfileImage { Id = 1, ProfileId = 1, Image = $"{directory}/wwwroot/images/ProfileStubImage.jpg" },
                 new ProfileImage { Id = 2, ProfileId = 1, Image = $"{directory}/wwwroot/images/BannerStubImage.jpg" },
-                new ProfileImage { Id = 3, ProfileId = 1, Image = $"{directory}/wwwroot/images/ProfileStubImage.jpg" });
+                new ProfileImage { Id = 3, ProfileId = 1, Image = $"{directory}/wwwroot/images/ProfileStubImage.jpg" },
+				new ProfileImage { Id = 4, ProfileId = 1, Image = $"{directory}/wwwroot/images/ProfileStubImage.jpg" },
+				new ProfileImage { Id = 5, ProfileId = 1, Image = $"{directory}/wwwroot/images/ProfileStubImage.jpg" },
+				new ProfileImage { Id = 6, ProfileId = 2, Image = $"{directory}/wwwroot/images/ProfileStubImage.jpg" });
         }
 
         private static void SeedPublicChats(ModelBuilder builder)

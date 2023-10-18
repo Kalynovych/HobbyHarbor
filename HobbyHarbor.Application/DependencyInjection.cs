@@ -7,7 +7,7 @@ namespace HobbyHarbor.Application
 	{
 		public static void AddApplication(this IServiceCollection services)
 		{
-			services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetFullUserById).Assembly));
+			services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetUserById).Assembly));
 		}
 	}
 }

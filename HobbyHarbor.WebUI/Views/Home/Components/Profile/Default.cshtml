@@ -1,0 +1,41 @@
+﻿@model ProfileViewModel
+
+<div class="profile">
+	<section class="profile-section1">
+		<img class="profile-banner-image" src="data:image/jpg;base64,@Model.BannerImage.Image" alt="Profile Banner" />
+		<div class="profile-info-block">
+			<img class="profile-image" src="data:image/jpg;base64,@Model.ProfileImage.Image" alt="Profile Image" />
+			<div class="profile-info">
+				<h2 class="profile-name">@Model.Name @Model.Surname</h2>
+				<p class="profile-about">@Model.About</p>
+			</div>
+		</div>
+		<div class="profile-activity-info">
+			<p>Public Chats: @Model.PublicChatsAmount</p>
+			<p>Private Chats: @Model.PrivateChatsAmount</p>
+			<p>Post Writed: @Model.Posts?.Count</p>
+		</div>
+	</section>
+	<section class="profile-section2">
+		<h2>Gallery</h2>
+		<div>
+			<button class="profile-gallery-button"><img src="~/images/Left.png" /></button>
+			@foreach (var image in Model.GalleryImages)
+			{
+				<img class="profile-gallery-image" src="data:image/jpg;base64,@image.Image" alt="image" />
+			}
+			<button class="profile-gallery-button"><img src="~/images/Right.png" /></button>
+		</div>
+	</section>
+	<section class="profile-section3">
+		<div>
+			<button class="post-write-button">Write Post</button>
+		</div>
+		<div class="profile-posts">
+			@foreach (var post in Model.Posts)
+			{
+				<vc:post model="post"></vc:post>
+			}
+		</div>
+	</section>
+</div>
