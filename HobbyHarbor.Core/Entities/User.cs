@@ -14,6 +14,8 @@
 
         public bool IsPremium { get; set; } = false;
 
+        public DateTime LastActivity { get; set; }
+
         public ICollection<UserChoice>? Choices { get; set; }
 
         public ICollection<Message> Messages { get; set; }

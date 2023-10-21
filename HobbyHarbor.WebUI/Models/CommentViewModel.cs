@@ -1,6 +1,4 @@
-﻿using HobbyHarbor.Core.Entities;
-
-namespace HobbyHarbor.WebUI.Models
+﻿namespace HobbyHarbor.WebUI.Models
 {
     public class CommentViewModel
     {
@@ -14,11 +12,15 @@ namespace HobbyHarbor.WebUI.Models
 
 		public string? Surname { get; set; }
 
+        public string Username { get; set; }
+
 		public string Text { get; set; }
 
         public int PostId { get; set; }
 
         public int? ReplyCommentId { get; set; }
+
+        public string? ReplyCommentUsername { get; set; }
 
         public DateTime Time { get; set; }
 

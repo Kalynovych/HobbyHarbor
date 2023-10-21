@@ -19,7 +19,18 @@ namespace HobbyHarbor.WebUI.MappingProfiles
 				.ForMember(dest => dest.PrivateChatsAmount, opt => opt.MapFrom(src => src.PrivateChats != null ? src.PrivateChats.Count : 0))
 				.ForMember(dest => dest.ProfileImage, opt => opt.MapFrom(src => src.Profile.Images.ElementAt(0)))
 				.ForMember(dest => dest.BannerImage, opt => opt.MapFrom(src => src.Profile.Images.ElementAt(1)))
-				.ForMember(dest => dest.GalleryImages, opt => opt.MapFrom(src => src.Profile.Images.Count > 2 ? src.Profile.Images.Skip(2) : null));
+				.ForMember(dest => dest.GalleryImages, opt => opt.MapFrom(src => src.Profile.Images.Count > 2 ? src.Profile.Images.Skip(2) : null))
+				.ForMember(dest => dest.OnlineStatus, opt => opt.MapFrom(src => OnlineStatusValueConvertor(src.LastActivity)));
+		}
+
+		private string OnlineStatusValueConvertor(DateTime lastActivity)
+		{
+			var passedTime = DateTime.Now - lastActivity;
+			string result = "";
+			if (passedTime.Days > 0) result = $"{passedTime.Days} day(-s) ago";
+			else if (passedTime.Hours > 0) result = $"{passedTime.Hours} hour(-s) ago";
+			else if (passedTime.Minutes > 0) result = $"{passedTime.Minutes} minute(-s) ago";
+			return $"Online {result}";
 		}
 	}
 }

@@ -25,7 +25,7 @@ namespace HobbyHarbor.WebUI.Controllers
 		public IActionResult Index()
 		{
 			User user = _mediator.Send(new GetUserById { Id = 1 }).Result;
-			Post post = _mediator.Send(new GetPostByCreatorId { Id = 2 }).Result;
+			user.Posts = _mediator.Send(new GetPostsByCreatorId { Id = 1 }).Result;
 			return View(_mapper.Map<ProfileViewModel>(user));
 		}
 
@@ -43,9 +43,17 @@ namespace HobbyHarbor.WebUI.Controllers
 		[HttpGet]
 		public IActionResult GetComments([FromQuery]int postId)
 		{
-			IEnumerable<Comment> comments = _mediator.Send(new GetCommentsByPostId { Id = postId, Take = 2 }).Result;
-			var v = _mapper.Map<IEnumerable<CommentViewModel>>(comments);
-			return ViewComponent(typeof(CommentsListViewComponent), v);
+			IEnumerable<Comment> comments = _mediator.Send(new GetCommentsByPostId { Id = postId, Take = 3 }).Result;
+			var commentViewModels = _mapper.Map<IEnumerable<CommentViewModel>>(comments);
+			return ViewComponent(typeof(CommentsListViewComponent), commentViewModels);
+		}
+
+		[HttpGet]
+		public IActionResult GetReplies([FromQuery]int commentId)
+		{
+			IEnumerable<Comment> comments = _mediator.Send(new GetRepliesByCommentId { Id = commentId }).Result;
+			var commentViewModels = _mapper.Map<IEnumerable<CommentViewModel>>(comments);
+			return ViewComponent(typeof(CommentsListViewComponent), commentViewModels);
 		}
 	}
 }

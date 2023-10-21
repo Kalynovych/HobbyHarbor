@@ -3,7 +3,7 @@ using MediatR;
 
 namespace HobbyHarbor.Application.Queries
 {
-	public class GetCommentsByPostId : IRequest<IEnumerable<Comment>>
+	public class GetCommentsByPostId : IRequest<ICollection<Comment>>
 	{
 		public int Id { get; set; }
 

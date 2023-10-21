@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HobbyHarbor.Application.Handlers.QueryHandlers
 {
-	public class GetCommentsByPostIdQueryHandler : IRequestHandler<GetCommentsByPostId, IEnumerable<Comment>>
+	public class GetCommentsByPostIdQueryHandler : IRequestHandler<GetCommentsByPostId, ICollection<Comment>>
 	{
 		private readonly IHobbyHarborDbContext _context;
 
@@ -15,10 +15,10 @@ namespace HobbyHarbor.Application.Handlers.QueryHandlers
 			_context = context;
 		}
 
-		public async Task<IEnumerable<Comment>> Handle(GetCommentsByPostId request, CancellationToken cancellationToken)
+		public async Task<ICollection<Comment>> Handle(GetCommentsByPostId request, CancellationToken cancellationToken)
 		{
-			IQueryable<Comment> query = _context.Comments.Where(x => x.PostId == request.Id).Include(x => x.Author).ThenInclude(x => x.Profile).ThenInclude(x => x.Images)
-				.Skip(request.Skip).Take(request.Take);
+			IQueryable<Comment> query = _context.Comments.Where(x => x.PostId == request.Id && x.ReplyCommentId == null).Include(x => x.Author).ThenInclude(x => x.Profile).ThenInclude(x => x.Images)
+				.OrderByDescending(x => x.Time).Skip(request.Skip).Take(request.Take);
 			return await query.ToListAsync();
 		}
 	}

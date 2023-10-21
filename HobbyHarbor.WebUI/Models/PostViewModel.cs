@@ -12,6 +12,8 @@
 
         public string? Surname { get; set; }
 
+        public string Username { get; set; }
+
         public ICollection<InterestModel> PostInterests { get; set; }
 
         public int Likes { get; set; }

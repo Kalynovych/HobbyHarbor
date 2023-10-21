@@ -41,7 +41,7 @@ header {
 
     a {
         text-decoration: none;
-        font-size: 20px;
+        font-size: 30px;
         padding-bottom: 3px;
 
         margin: {
@@ -67,7 +67,7 @@ header {
 }
 
 .header-logo {
-    font-size: 25px;
+    font-size: 35px;
     font-weight: 500;
 
     &:hover {
@@ -77,9 +77,33 @@ header {
 }
 
 .profile-section1 {
+    position: relative;
+}
+
+.profile-banner-row {
     display: flex;
     justify-content: space-between;
-    position: relative;
+}
+
+.profile-details-row {
+    background-color: $base-color;
+}
+
+.profile-details {
+    padding: 10px;
+    display: flex;
+
+    p {
+        margin: 0;
+        margin-right: 15px;
+        font-size: 20px;
+    }
+}
+
+.profile-about {
+    padding: 10px;
+    padding-top: 0;
+    font-size: 25px;
 }
 
 .profile-info {
@@ -92,7 +116,12 @@ header {
 
     h2 {
         margin-top: 10px;
-        margin-bottom: 30px;
+        margin-bottom: 0;
+    }
+
+    p {
+        font-size: 18px;
+        margin-bottom: 5px;
     }
 }
 
@@ -111,7 +140,7 @@ header {
 
 .profile-banner-image {
     width: 100%;
-    height: 100%;
+    height: 210px;
     position: absolute;
     z-index: -1;
 }
@@ -122,12 +151,14 @@ header {
 
     p {
         font-weight: 500;
+        font-size: 20px;
     }
 }
 
 .profile-gallery-image {
     height: 200px;
     width: auto;
+    padding: 0 5px;
 }
 
 .profile-gallery-button {
@@ -211,13 +242,17 @@ header {
     display: flex;
     width: 100%;
     justify-content: space-between;
+
+    p {
+        margin-bottom: 5px;
+    }
 }
 
-.post-interests-container {
+.post-interests-container, .profile-user-interests {
     display: flex;
 }
 
-.post-interest {
+.post-interest, .profile-interest {
     border-radius: 10px 10px;
     padding: 2px 7px;
     margin: 0 2px;
@@ -330,6 +365,18 @@ header {
     width: 50px;
 }
 
+.comment-profile-name {
+    flex-direction: column;
+    
+    h2 {
+        margin: 0;
+    }
+
+    p {
+        font-size: 18px;
+    }
+}
+
 .comment-author-container {
     display: flex;
 
@@ -362,6 +409,20 @@ header {
 .comment-publication-time {
     font-size: 20px;
     margin: auto 0;
+}
+
+.comment-reply-wrapper {
+    margin-left: 50px;
+}
+
+.comment-replies-button {
+    background-color: $button-color;
+    border: none;
+    font-size: 20px;
+    padding: 0 5px;
+    margin: 5px;
+    margin-left: 490px;
+    border-radius: 10px 10px;
 }
 
 .post-load-more-wrapper {

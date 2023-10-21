@@ -52,8 +52,14 @@ namespace HobbyHarbor.Infrastructure.Data
         {
             builder.Entity<Comment>().HasData(
                 new Comment { Id = 1, AuthorId = 1, Dislikes = 10, Likes = 15, PostId = 1, Text = "comment text1", Time = DateTime.Now },
-                new Comment { Id = 2, AuthorId = 2, Dislikes = 10, Likes = 15, PostId = 1, Text = "comment text2", Time = DateTime.Now },
-                new Comment { Id = 3, AuthorId = 1, Dislikes = 10, Likes = 15, PostId = 2, Text = "comment text3", ReplyCommentId = 2, Time = DateTime.Now });
+                new Comment { Id = 2, AuthorId = 2, Dislikes = 10, Likes = 15, PostId = 1, Text = "comment text2", Time = DateTime.Now.Subtract(TimeSpan.FromDays(1)) },
+                new Comment { Id = 3, AuthorId = 1, Dislikes = 10, Likes = 15, PostId = 1, Text = "comment text3", ReplyCommentId = 1, Time = DateTime.Now },
+				new Comment { Id = 4, AuthorId = 1, Dislikes = 10, Likes = 15, PostId = 1, Text = "comment text4", ReplyCommentId = 1, Time = DateTime.Now },
+				new Comment { Id = 5, AuthorId = 1, Dislikes = 10, Likes = 15, PostId = 1, Text = "comment text5", ReplyCommentId = 3, Time = DateTime.Now },
+				new Comment { Id = 6, AuthorId = 1, Dislikes = 10, Likes = 15, PostId = 1, Text = "comment text6", ReplyCommentId = 5, Time = DateTime.Now },
+				new Comment { Id = 7, AuthorId = 1, Dislikes = 10, Likes = 15, PostId = 1, Text = "comment text7", ReplyCommentId = 6, Time = DateTime.Now },
+				new Comment { Id = 8, AuthorId = 1, Dislikes = 10, Likes = 15, PostId = 2, Text = "comment text8", Time = DateTime.Now },
+				new Comment { Id = 9, AuthorId = 1, Dislikes = 10, Likes = 15, PostId = 2, Text = "comment text9", ReplyCommentId = 8, Time = DateTime.Now });
         }
 
         private static void SeedInterests(ModelBuilder builder)
@@ -153,11 +159,11 @@ namespace HobbyHarbor.Infrastructure.Data
         private static void SeedUsers(ModelBuilder builder)
         {
             builder.Entity<User>().HasData(
-                new User { Id = 1, Email = "mail@gmail.com", IsPremium = true, Password = "password", Username = "username1" },
-                new User { Id = 2, Email = "mymail@gmail.com", IsPremium = false, Password = "password", Username = "username2" },
-                new User { Id = 3, Email = "mail@ukr.net", IsPremium = false, Password = "password", Username = "username3" },
-                new User { Id = 4, Email = "mail@gmail.com", IsPremium = true, Password = "password", Username = "username4" },
-                new User { Id = 5, Email = "anothermail@gmail.com", IsPremium = false, Password = "password", Username = "username5" });
+                new User { Id = 1, Email = "mail@gmail.com", IsPremium = true, Password = "password", Username = "username1", LastActivity = DateTime.Now.AddDays(-1).AddHours(-2).AddMinutes(-10) },
+                new User { Id = 2, Email = "mymail@gmail.com", IsPremium = false, Password = "password", Username = "username2", LastActivity = DateTime.Now },
+                new User { Id = 3, Email = "mail@ukr.net", IsPremium = false, Password = "password", Username = "username3", LastActivity = DateTime.Now },
+                new User { Id = 4, Email = "mail@gmail.com", IsPremium = true, Password = "password", Username = "username4", LastActivity = DateTime.Now },
+                new User { Id = 5, Email = "anothermail@gmail.com", IsPremium = false, Password = "password", Username = "username5", LastActivity = DateTime.Now });
         }
 
         private static void SeedUserChoices(ModelBuilder builder)

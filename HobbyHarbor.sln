@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HobbyHarbor.Application", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HobbyHarbor.Shared", "HobbyHarbor.Shared\HobbyHarbor.Shared.csproj", "{2F0A1A17-4685-4DAF-AEE3-0C4AEF17F08D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{98768672-9D78-4995-A1A9-B4ABCA2C61EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HobbyHarbor.Tests", "HobbyHarbor.Tests\HobbyHarbor.Tests.csproj", "{CA12FCF6-0491-4987-A2CE-409AFA26894E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,9 +43,16 @@ Global
 		{2F0A1A17-4685-4DAF-AEE3-0C4AEF17F08D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F0A1A17-4685-4DAF-AEE3-0C4AEF17F08D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F0A1A17-4685-4DAF-AEE3-0C4AEF17F08D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA12FCF6-0491-4987-A2CE-409AFA26894E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA12FCF6-0491-4987-A2CE-409AFA26894E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA12FCF6-0491-4987-A2CE-409AFA26894E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA12FCF6-0491-4987-A2CE-409AFA26894E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CA12FCF6-0491-4987-A2CE-409AFA26894E} = {98768672-9D78-4995-A1A9-B4ABCA2C61EA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E52E62ED-F9AB-407B-848E-431A6C0B3C84}

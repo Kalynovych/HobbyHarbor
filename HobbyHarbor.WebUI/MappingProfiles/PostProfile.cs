@@ -12,7 +12,8 @@ namespace HobbyHarbor.WebUI.MappingProfiles
 				.ForMember(dest => dest.AttachmentType, opt => opt.MapFrom(src => src.AttachmentType != null ? src.AttachmentType.Name : null))
 				.ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Creator.Profile.Name))
 				.ForMember(dest => dest.Surname, opt => opt.MapFrom(src => src.Creator.Profile.Surname))
-				.ForMember(dest => dest.ProfileImage, opt => opt.MapFrom(src => src.Creator.Profile.Images.ElementAt(0)));
+				.ForMember(dest => dest.ProfileImage, opt => opt.MapFrom(src => src.Creator.Profile.Images.ElementAt(0)))
+				.ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.Creator.Username));
 		}
 	}
 }

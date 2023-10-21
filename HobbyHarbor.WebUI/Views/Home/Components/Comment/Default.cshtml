@@ -4,11 +4,14 @@
 	<div class="comment-author-container">
 		<img class="comment-profile-image" src="data:image/jpg;base64,@Model.ProfileImage.Image" />
 		<div>
-			<h2 class="profile-name">@Model.Name @Model.Surname</h2>
+			<div class="comment-profile-name">
+				<h2 class="profile-name">@Model.Name @Model.Surname</h2>
+				<p>@Model.Username</p>
+			</div>
 			<p class="comment-reply">Reply</p>
 		</div>
 	</div>
-	<p class="comment-text">@Model.Text</p>
+	<p class="comment-text"><b>@GetPrefix()</b> @Model.Text</p>
 	<div class="comment-bottom">
 		<div class="reaction-container">
 			<div class="reactions">
@@ -23,3 +26,17 @@
 		<p class="comment-publication-time">@Model.Time.ToShortTimeString()</p>
 	</div>
 </div>
+@if (Model.ReplyCommentId == null)
+{
+	<div class="comment-replies">
+		<button data-commentid="@Model.Id" class="comment-replies-button">Replies</button>
+		<div class="comment-reply-wrapper hide"></div>
+	</div>
+}
+
+@functions {
+	string GetPrefix()
+	{
+		return Model.ReplyCommentId != null ? $"{Model.ReplyCommentUsername}," : "";
+	}
+}

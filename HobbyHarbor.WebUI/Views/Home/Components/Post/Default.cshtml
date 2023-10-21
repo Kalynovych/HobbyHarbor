@@ -4,8 +4,9 @@
 	<div class="post-creator-container">
 		<img class="post-profile-image" src="data:image/jpg;base64,@Model.ProfileImage.Image" />
 		<div class="post-info">
-			<div>
+			<div class="profile-info">
 				<h2 class="profile-name">@Model.Name @Model.Surname</h2>
+				<p>@Model.Username</p>
 				<div class="post-interests-container">
 					@foreach (var interest in Model.PostInterests)
 					{
@@ -59,9 +60,9 @@
 					<p>@Model.Dislikes</p>
 				</div>
 			</div>
-			<p id="openComments" class="post-comment-count">Comments: @Model.Comments.Count</p>
+			<p class="post-comment-count" data-postid="@Model.Id">Comments: @Model.Comments.Count</p>
 		</div>
-		<div id="commentSection" class="post-comment-section hide">
+		<div class="post-comment-section hide">
 			<form class="post-leave-comment-form">
 				<textarea placeholder="Leave a comment"></textarea>
 				<div class="post-leave-comment-buttons">
@@ -69,7 +70,7 @@
 					<input type="submit" value="Comment" />
 				</div>
 			</form>
-			<div id ="commentsContainer"></div>
+			<div class="comments-wrapper"></div>
 			<div class="post-load-more-wrapper">
 				<button class="post-load-more-button">Load More...</button>
 			</div>
