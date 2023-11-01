@@ -23,17 +23,20 @@ namespace HobbyHarbor.Infrastructure.Data
         {
             SeedAttachmentTypes(builder);
             SeedComments(builder);
+            SeedCommentsReactions(builder);
             SeedInterests(builder);
             SeedInterestCategories(builder);
-            SeedMessages(builder);
             SeedPayments(builder);
             SeedPosts(builder);
             SeedPostInterests(builder);
+            SeedPostReactions(builder);
             SeedPrivateChats(builder);
-            SeedProfiles(builder);
+			SeedPrivateMessages(builder);
+			SeedProfiles(builder);
             SeedProfileImages(builder);
             SeedPublicChats(builder);
             SeedPublicChatInterests(builder);
+            SeedPublicMessages(builder);
             SeedUsers(builder);
             SeedUserChoices(builder);
             SeedUserInterests(builder);
@@ -51,18 +54,29 @@ namespace HobbyHarbor.Infrastructure.Data
         private static void SeedComments(ModelBuilder builder)
         {
             builder.Entity<Comment>().HasData(
-                new Comment { Id = 1, AuthorId = 1, Dislikes = 10, Likes = 15, PostId = 1, Text = "comment text1", Time = DateTime.Now },
-                new Comment { Id = 2, AuthorId = 2, Dislikes = 10, Likes = 15, PostId = 1, Text = "comment text2", Time = DateTime.Now.Subtract(TimeSpan.FromDays(1)) },
-                new Comment { Id = 3, AuthorId = 1, Dislikes = 10, Likes = 15, PostId = 1, Text = "comment text3", ReplyCommentId = 1, Time = DateTime.Now },
-				new Comment { Id = 4, AuthorId = 1, Dislikes = 10, Likes = 15, PostId = 1, Text = "comment text4", ReplyCommentId = 1, Time = DateTime.Now },
-				new Comment { Id = 5, AuthorId = 1, Dislikes = 10, Likes = 15, PostId = 1, Text = "comment text5", ReplyCommentId = 3, Time = DateTime.Now },
-				new Comment { Id = 6, AuthorId = 1, Dislikes = 10, Likes = 15, PostId = 1, Text = "comment text6", ReplyCommentId = 5, Time = DateTime.Now },
-				new Comment { Id = 7, AuthorId = 1, Dislikes = 10, Likes = 15, PostId = 1, Text = "comment text7", ReplyCommentId = 6, Time = DateTime.Now },
-				new Comment { Id = 8, AuthorId = 1, Dislikes = 10, Likes = 15, PostId = 2, Text = "comment text8", Time = DateTime.Now },
-				new Comment { Id = 9, AuthorId = 1, Dislikes = 10, Likes = 15, PostId = 2, Text = "comment text9", ReplyCommentId = 8, Time = DateTime.Now });
+                new Comment { Id = 1, AuthorId = 1, PostId = 1, Text = "comment text1", Time = DateTime.Now },
+                new Comment { Id = 2, AuthorId = 2, PostId = 1, Text = "comment text2", Time = DateTime.Now.Subtract(TimeSpan.FromDays(1)) },
+                new Comment { Id = 3, AuthorId = 1, PostId = 1, Text = "comment text3", ReplyCommentId = 1, Time = DateTime.Now },
+				new Comment { Id = 4, AuthorId = 1, PostId = 1, Text = "comment text4", ReplyCommentId = 1, Time = DateTime.Now },
+				new Comment { Id = 5, AuthorId = 1, PostId = 1, Text = "comment text5", ReplyCommentId = 3, Time = DateTime.Now },
+				new Comment { Id = 6, AuthorId = 1, PostId = 1, Text = "comment text6", ReplyCommentId = 5, Time = DateTime.Now },
+				new Comment { Id = 7, AuthorId = 1, PostId = 1, Text = "comment text7", ReplyCommentId = 6, Time = DateTime.Now },
+				new Comment { Id = 8, AuthorId = 1, PostId = 2, Text = "comment text8", Time = DateTime.Now },
+				new Comment { Id = 9, AuthorId = 1, PostId = 2, Text = "comment text9", ReplyCommentId = 8, Time = DateTime.Now });
         }
 
-        private static void SeedInterests(ModelBuilder builder)
+		private static void SeedCommentsReactions(ModelBuilder builder)
+		{
+			builder.Entity<CommentsReaction>().HasData(
+				new CommentsReaction { UserId = 1, CommentId = 1, IsLiked = true },
+				new CommentsReaction { UserId = 1, CommentId = 2, IsLiked = true },
+				new CommentsReaction { UserId = 1, CommentId = 3, IsLiked = false },
+				new CommentsReaction { UserId = 2, CommentId = 1, IsLiked = true },
+				new CommentsReaction { UserId = 2, CommentId = 2, IsLiked = false },
+				new CommentsReaction { UserId = 2, CommentId = 3, IsLiked = false });
+		}
+
+		private static void SeedInterests(ModelBuilder builder)
         {
             builder.Entity<Interest>().HasData(
                 new Interest { Id = 1, CategoryId = 1, Title = "JOJO" },
@@ -78,15 +92,6 @@ namespace HobbyHarbor.Infrastructure.Data
                 new InterestCategory { Id = 3, CategoryName = "books"});
         }
 
-        private static void SeedMessages(ModelBuilder builder)
-        {
-            builder.Entity<Message>().HasData(
-                new Message { Id = 1, AttachmentTypeId = 1, Attachment = "pathToAttachment", CreatorId = 1, CompanionId = 2,
-                    MessageText = "message1", IsPrivateChat = true, Time = DateTime.Now, MessageAuthorId = 1 },
-                new Message { Id = 2, CreatorId = 1, CompanionId = 2, MessageText = "message2", IsPrivateChat = true, Time = DateTime.Now, MessageAuthorId = 2, ReplyMessageId = 1 },
-                new Message { Id = 3, MessageText = "message3", IsPrivateChat = false, Time = DateTime.Now, PublicChatId = 1, MessageAuthorId = 1 });
-        }
-
         private static void SeedPayments(ModelBuilder builder)
         {
             builder.Entity<Payment>().HasData(
@@ -97,9 +102,9 @@ namespace HobbyHarbor.Infrastructure.Data
         private static void SeedPosts(ModelBuilder builder)
         {
             builder.Entity<Post>().HasData(
-                new Post { Id = 1, AttachmentTypeId = 1, CreatorId = 1, Dislikes = 50, Likes = 17, PostContent = "post content1", PostTitle = "title1", PublicationTime = DateTime.Now },
-                new Post { Id = 2, AttachmentTypeId = 2, CreatorId = 1, Dislikes = 50, Likes = 17, PostContent = "post content2", PostTitle = "title2", PublicationTime = DateTime.Now },
-                new Post { Id = 3, CreatorId = 2, Dislikes = 50, Likes = 17, PostContent = "post content3", PostTitle = "title3", PublicationTime = DateTime.Now });
+                new Post { Id = 1, AttachmentTypeId = 1, CreatorId = 1, PostContent = "post content1", PostTitle = "title1", PublicationTime = DateTime.Now },
+                new Post { Id = 2, AttachmentTypeId = 2, CreatorId = 1, PostContent = "post content2", PostTitle = "title2", PublicationTime = DateTime.Now },
+                new Post { Id = 3, CreatorId = 2, PostContent = "post content3", PostTitle = "title3", PublicationTime = DateTime.Now });
         }
 
         private static void SeedPostInterests(ModelBuilder builder)
@@ -110,7 +115,16 @@ namespace HobbyHarbor.Infrastructure.Data
                 new PostInterest { PostId = 2, InterestId = 1});
         }
 
-        private static void SeedPrivateChats(ModelBuilder builder)
+		private static void SeedPostReactions(ModelBuilder builder)
+		{
+			builder.Entity<PostsReaction>().HasData(
+				new PostsReaction { UserId = 1, PostId = 1, IsLiked = true },
+				new PostsReaction { UserId = 1, PostId = 2, IsLiked = false },
+				new PostsReaction { UserId = 2, PostId = 2, IsLiked = true },
+				new PostsReaction { UserId = 2, PostId = 1, IsLiked = false });
+		}
+
+		private static void SeedPrivateChats(ModelBuilder builder)
         {
             builder.Entity<PrivateChat>().HasData(
                 new PrivateChat { CreatorId = 1, CompanionId = 2 },
@@ -118,7 +132,16 @@ namespace HobbyHarbor.Infrastructure.Data
                 new PrivateChat { CreatorId = 2, CompanionId = 3 });
         }
 
-        private static void SeedProfiles(ModelBuilder builder)
+		private static void SeedPrivateMessages(ModelBuilder builder)
+		{
+			builder.Entity<PrivateMessage>().HasData(
+				new PrivateMessage { Id = 1, AttachmentTypeId = 1, Attachment = "pathToAttachment", CreatorId = 1, 
+                    CompanionId = 2, MessageText = "message1", Time = DateTime.Now, MessageAuthorId = 1 },
+				new PrivateMessage { Id = 2, CreatorId = 1, CompanionId = 2, MessageText = "message2", Time = DateTime.Now, MessageAuthorId = 2, ReplyMessageId = 1 },
+				new PrivateMessage { Id = 3, CreatorId = 1, CompanionId = 2, MessageText = "message3", Time = DateTime.Now, MessageAuthorId = 1 });
+		}
+
+		private static void SeedProfiles(ModelBuilder builder)
         {
             builder.Entity<Profile>().HasData(
                 new Profile { Id = 1, UserId = 1, About = "about1", Age = 20, Birthdate = DateTime.Now, Country = "Ukraine", Name = "Name1", Sex = "male", Surname = "Surname" },
@@ -156,7 +179,15 @@ namespace HobbyHarbor.Infrastructure.Data
                 new PublicChatInterest { PublicChatId = 2, InterestId = 1 });
         }
 
-        private static void SeedUsers(ModelBuilder builder)
+		private static void SeedPublicMessages(ModelBuilder builder)
+		{
+			builder.Entity<PublicMessage>().HasData(
+				new PublicMessage { Id = 1, AttachmentTypeId = 1, Attachment = "pathToAttachment", MessageText = "message1", Time = DateTime.Now, MessageAuthorId = 1, PublicChatId = 1 },
+				new PublicMessage { Id = 2, MessageText = "message2", Time = DateTime.Now, MessageAuthorId = 2, ReplyMessageId = 1, PublicChatId = 1 },
+				new PublicMessage { Id = 3, MessageText = "message3", Time = DateTime.Now, MessageAuthorId = 3, PublicChatId = 1 });
+		}
+
+		private static void SeedUsers(ModelBuilder builder)
         {
             builder.Entity<User>().HasData(
                 new User { Id = 1, Email = "mail@gmail.com", IsPremium = true, Password = "password", Username = "username1", LastActivity = DateTime.Now.AddDays(-1).AddHours(-2).AddMinutes(-10) },

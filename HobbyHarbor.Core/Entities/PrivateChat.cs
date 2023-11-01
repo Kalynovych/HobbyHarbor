@@ -10,6 +10,6 @@
 
         public User Companion { get; set; }
 
-        public ICollection<Message>? Messages { get; set; }
+        public ICollection<PrivateMessage>? Messages { get; set; }
     }
 }

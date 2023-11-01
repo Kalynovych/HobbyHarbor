@@ -23,7 +23,7 @@ namespace HobbyHarbor.Application.Handlers.QueryHandlers
 			
 			GetHierarchy(replyToRequested, allReplies, nestedIds);
 			IQueryable<Comment> query = _context.Comments.Where(x => nestedIds.Contains(x.Id)).Include(x => x.Author).ThenInclude(x => x.Profile).ThenInclude(x => x.Images)
-				.Include(x => x.ReplyTo).OrderBy(x => x.Time);
+				.Include(x => x.Reactions).Include(x => x.ReplyTo).OrderBy(x => x.Time);
 			return await query.ToListAsync();
 		}
 

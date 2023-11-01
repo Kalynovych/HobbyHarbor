@@ -1,6 +1,6 @@
 ﻿namespace HobbyHarbor.Core.Entities
 {
-    public class Message
+    public class PrivateMessage
     {
         public int Id { get; set; }
 
@@ -14,9 +14,7 @@
 
         public int? ReplyMessageId { get; set; }
 
-        public Message? ReplyTo { get; set; }
-
-        public bool IsPrivateChat { get; set; }
+        public PrivateMessage? ReplyTo { get; set; }
 
         public string? Attachment { get; set; }
 
@@ -29,9 +27,5 @@
         public int? CompanionId { get; set; }
 
         public PrivateChat? PrivateChat { get; set; }
-
-        public int? PublicChatId { get; set; }
-
-        public PublicChat? PublicChat { get; set; }
     }
 }

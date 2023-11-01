@@ -41,12 +41,12 @@ header {
 
     a {
         text-decoration: none;
-        font-size: 30px;
+        font-size: 25px;
         padding-bottom: 3px;
 
         margin: {
             left: 20px;
-            right: 30px;
+            right: 10px;
         }
 
         &:hover {
@@ -67,7 +67,7 @@ header {
 }
 
 .header-logo {
-    font-size: 35px;
+    font-size: 30px;
     font-weight: 500;
 
     &:hover {
@@ -166,7 +166,7 @@ header {
     height: 45px;
     border-radius: 50%;
     background-color: #b9b9b9;
-    margin: 0 15px; 
+    margin: 0 15px;
     border: none;
     cursor: pointer;
 
@@ -367,7 +367,7 @@ header {
 
 .comment-profile-name {
     flex-direction: column;
-    
+
     h2 {
         margin: 0;
     }
@@ -439,7 +439,11 @@ header {
     border-radius: 10px 10px;
 }
 
-.footer-copyright {
-    margin: 10px 20px;
-    font-size: 20px;
+footer {
+    display: flex;
+
+    div {
+        margin: 10px 20px;
+        font-size: 20px;
+    }
 }

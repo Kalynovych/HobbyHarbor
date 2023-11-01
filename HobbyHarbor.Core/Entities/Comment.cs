@@ -20,8 +20,6 @@
 
         public DateTime Time {  get; set; }
 
-        public int Likes { get; set; }
-
-        public int Dislikes { get; set; }
-    }
+        public ICollection<CommentsReaction>? Reactions { get; set; }
+	}
 }

@@ -1,5 +1,7 @@
 ﻿@model CommentViewModel
 
+@inject IViewLocalizer _localizer
+
 <div class="comment">
 	<div class="comment-author-container">
 		<img class="comment-profile-image" src="data:image/jpg;base64,@Model.ProfileImage.Image" />
@@ -8,7 +10,7 @@
 				<h2 class="profile-name">@Model.Name @Model.Surname</h2>
 				<p>@Model.Username</p>
 			</div>
-			<p class="comment-reply">Reply</p>
+			<p class="comment-reply">@_localizer["Reply"]</p>
 		</div>
 	</div>
 	<p class="comment-text"><b>@GetPrefix()</b> @Model.Text</p>
@@ -29,7 +31,7 @@
 @if (Model.ReplyCommentId == null)
 {
 	<div class="comment-replies">
-		<button data-commentid="@Model.Id" class="comment-replies-button">Replies</button>
+		<button data-commentid="@Model.Id" class="comment-replies-button">@_localizer["Replies"]</button>
 		<div class="comment-reply-wrapper hide"></div>
 	</div>
 }

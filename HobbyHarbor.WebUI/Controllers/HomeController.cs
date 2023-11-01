@@ -5,7 +5,6 @@ using AutoMapper;
 using HobbyHarbor.Core.Entities;
 using MediatR;
 using HobbyHarbor.Application.Queries;
-using HobbyHarbor.WebUI.ViewComponents;
 
 namespace HobbyHarbor.WebUI.Controllers
 {
@@ -22,10 +21,10 @@ namespace HobbyHarbor.WebUI.Controllers
 			_mediator = mediator;
 		}
 
-		public IActionResult Index()
+		public async Task<IActionResult> Index()
 		{
-			User user = _mediator.Send(new GetUserById { Id = 1 }).Result;
-			user.Posts = _mediator.Send(new GetPostsByCreatorId { Id = 1 }).Result;
+			User user = await _mediator.Send(new GetUserById { Id = 1 });
+			user.Posts = await _mediator.Send(new GetPostsByCreatorId { Id = 1, Take = 10 });
 			return View(_mapper.Map<ProfileViewModel>(user));
 		}
 
@@ -38,22 +37,6 @@ namespace HobbyHarbor.WebUI.Controllers
 		public IActionResult Error()
 		{
 			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-		}
-
-		[HttpGet]
-		public IActionResult GetComments([FromQuery]int postId)
-		{
-			IEnumerable<Comment> comments = _mediator.Send(new GetCommentsByPostId { Id = postId, Take = 3 }).Result;
-			var commentViewModels = _mapper.Map<IEnumerable<CommentViewModel>>(comments);
-			return ViewComponent(typeof(CommentsListViewComponent), commentViewModels);
-		}
-
-		[HttpGet]
-		public IActionResult GetReplies([FromQuery]int commentId)
-		{
-			IEnumerable<Comment> comments = _mediator.Send(new GetRepliesByCommentId { Id = commentId }).Result;
-			var commentViewModels = _mapper.Map<IEnumerable<CommentViewModel>>(comments);
-			return ViewComponent(typeof(CommentsListViewComponent), commentViewModels);
 		}
 	}
 }

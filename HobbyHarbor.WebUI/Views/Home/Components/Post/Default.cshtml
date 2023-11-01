@@ -1,5 +1,7 @@
 ﻿@model PostViewModel
 
+@inject IViewLocalizer _localizer
+
 <div class="post">
 	<div class="post-creator-container">
 		<img class="post-profile-image" src="data:image/jpg;base64,@Model.ProfileImage.Image" />
@@ -60,19 +62,19 @@
 					<p>@Model.Dislikes</p>
 				</div>
 			</div>
-			<p class="post-comment-count" data-postid="@Model.Id">Comments: @Model.Comments.Count</p>
+			<p class="post-comment-count" data-postid="@Model.Id">@_localizer["Comments"]: @Model.Comments.Count</p>
 		</div>
 		<div class="post-comment-section hide">
 			<form class="post-leave-comment-form">
-				<textarea placeholder="Leave a comment"></textarea>
+				<textarea placeholder="@_localizer["LeaveComment"]"></textarea>
 				<div class="post-leave-comment-buttons">
-					<button>Cancel</button>
-					<input type="submit" value="Comment" />
+					<button>@_localizer["Cancel"]</button>
+					<input type="submit" value="@_localizer["Comment"]" />
 				</div>
 			</form>
 			<div class="comments-wrapper"></div>
 			<div class="post-load-more-wrapper">
-				<button class="post-load-more-button">Load More...</button>
+				<button class="post-load-more-button">@_localizer["LoadMore"]</button>
 			</div>
 		</div>
 	</div>

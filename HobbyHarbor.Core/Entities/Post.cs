@@ -10,11 +10,7 @@
 
         public ICollection<PostInterest> PostInterests { get; set; }
 
-        public int Likes { get; set; }
-
-        public int Dislikes { get; set; }
-
-        public ICollection<Comment>? Comments { get; set; }
+		public ICollection<Comment>? Comments { get; set; }
 
         public string PostTitle { get; set; }
 
@@ -27,5 +23,7 @@
         public AttachmentType? AttachmentType { get; set; }
 
         public DateTime PublicationTime { get; set; }
-    }
+
+		public ICollection<PostsReaction>? Reactions { get; set; }
+	}
 }

@@ -4,9 +4,9 @@ using HobbyHarbor.Core.Entities;
 
 namespace HobbyHarbor.Infrastructure.Data.Configuration
 {
-    public class MessageEntityConfiguration : IEntityTypeConfiguration<Message>
+    public class PrivateMessageEntityConfiguration : IEntityTypeConfiguration<PrivateMessage>
     {
-        public void Configure(EntityTypeBuilder<Message> builder)
+        public void Configure(EntityTypeBuilder<PrivateMessage> builder)
         {
             builder.HasKey(x => x.Id);
 
@@ -15,13 +15,8 @@ namespace HobbyHarbor.Infrastructure.Data.Configuration
                 .HasForeignKey(x => new { x.CreatorId, x.CompanionId})
                 .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne(x => x.PublicChat)
-                .WithMany(x => x.Messages)
-                .HasForeignKey(x => x.PublicChatId)
-                .OnDelete(DeleteBehavior.NoAction);
-
             builder.HasOne(x => x.MessageAuthor)
-                .WithMany(x => x.Messages)
+                .WithMany(x => x.PrivateMessages)
                 .HasForeignKey(x => x.MessageAuthorId)
                 .OnDelete(DeleteBehavior.NoAction);
 

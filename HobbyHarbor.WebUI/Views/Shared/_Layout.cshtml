@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Mvc.Localization;
+
+@inject IViewLocalizer _localizer
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
@@ -11,16 +15,16 @@
 	<header>
 		<nav class="border-bottom box-shadow mb-3">
 			<div>
-				<a class="header-logo" href="#">HobbyHarbor</a>
-				<a href="#">Home</a>
-				<a href="#">Private Chats</a>
-				<a href="#">Public Chats</a>
-				<a href="#">Blog</a>
-				<a href="#">Find New People</a>
+				<a class="header-logo" href="#">@_localizer["HobbyHarbor"]</a>
+				<a href="#">@_localizer["Home"]</a>
+				<a href="#">@_localizer["PrivateChats"]</a>
+				<a href="#">@_localizer["PublicChats"]</a>
+				<a href="#">@_localizer["Blog"]</a>
+				<a href="#">@_localizer["FindNewPeople"]</a>
 			</div>
 			<div>
-				<a href="#">Sign In</a>
-				<a href="#">Sign Up</a>
+				<a href="#">@_localizer["SignIn"]</a>
+				<a href="#">@_localizer["SignUp"]</a>
 			</div>
 		</nav>
 	</header>
@@ -34,6 +38,7 @@
 		<div class="footer-copyright">
 			&copy; 2023 - HobbyHarbor
 		</div>
+		@await Html.PartialAsync("_CulturePartial")
 	</footer>
 	<script src="~/lib/jquery/dist/jquery.min.js"></script>
 	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

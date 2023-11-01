@@ -17,8 +17,10 @@ namespace HobbyHarbor.Application.Handlers.QueryHandlers
 
 		public async Task<ICollection<Post>> Handle(GetPostsByCreatorId request, CancellationToken cancellationToken)
 		{
-			IQueryable<Post> query = _context.Posts.Where(x => x.CreatorId == request.Id).Include(x => x.Creator).ThenInclude(x => x.Profile).ThenInclude(x => x.Images)
-				.Include(x => x.PostInterests).ThenInclude(x => x.Interest).Include(x => x.Comments);
+			if (request.Skip < 0) request.Skip = 0;
+
+			IQueryable<Post> query = _context.Posts.Where(x => x.CreatorId == request.Id).Include(x => x.Creator).ThenInclude(x => x.Profile).ThenInclude(x => x.Images).Include(x => x.Reactions)
+				.Include(x => x.PostInterests).ThenInclude(x => x.Interest).Include(x => x.Comments).OrderByDescending(x => x.PublicationTime).Skip(request.Skip).Take(request.Take);
 			return await query.ToListAsync();
 		}
 	}

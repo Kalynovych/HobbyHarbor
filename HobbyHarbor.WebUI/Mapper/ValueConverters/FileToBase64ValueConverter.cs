@@ -1,8 +1,10 @@
-﻿namespace HobbyHarbor.WebUI
+﻿using AutoMapper;
+
+namespace HobbyHarbor.WebUI
 {
-	public static class MappingExtensions
+	public class FileToBase64ValueConverter : IValueConverter<string?, string?>
 	{
-		public static string? FileToBase64String(this AutoMapper.Profile profile, string path)
+		public string? Convert(string? path, ResolutionContext context)
 		{
 			string? resultString;
 			try
@@ -11,7 +13,7 @@
 				{
 					byte[] bytes = new byte[fileStream.Length];
 					fileStream.Read(bytes, 0, bytes.Length);
-					resultString = Convert.ToBase64String(bytes);
+					resultString = System.Convert.ToBase64String(bytes);
 				}
 			}
 			catch

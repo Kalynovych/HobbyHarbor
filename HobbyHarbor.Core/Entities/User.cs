@@ -16,9 +16,15 @@
 
         public DateTime LastActivity { get; set; }
 
-        public ICollection<UserChoice>? Choices { get; set; }
+        public ICollection<CommentsReaction>? CommentsReactions { get; set; }
 
-        public ICollection<Message> Messages { get; set; }
+		public ICollection<PostsReaction>? PostsReactions { get; set; }
+
+		public ICollection<UserChoice>? Choices { get; set; }
+
+        public ICollection<PrivateMessage> PrivateMessages { get; set; }
+
+        public ICollection<PublicMessage> PublicMessages { get; set; }
 
         public ICollection<PrivateChat>? PrivateChats { get; set; }
 
