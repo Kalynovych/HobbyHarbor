@@ -15,9 +15,4 @@
     <ProjectReference Include="..\HobbyHarbor.Core\HobbyHarbor.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Commands\" />
-    <Folder Include="Handlers\CommandHandlers\" />
-  </ItemGroup>
-
 </Project>

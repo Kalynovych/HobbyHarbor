@@ -1,6 +1,13 @@
 ﻿@model ProfileViewModel
 
 <div>
-	<vc:profile model="@Model"></vc:profile>
-	
+	@if (User.Identity.IsAuthenticated)
+	{
+		<vc:profile model="@Model"></vc:profile>
+	}
+	else
+	{
+		<h1>Welcome to HobbyHarbor</h1>
+		<p>Here you can find people with common interests!</p>
+	}
 </div>

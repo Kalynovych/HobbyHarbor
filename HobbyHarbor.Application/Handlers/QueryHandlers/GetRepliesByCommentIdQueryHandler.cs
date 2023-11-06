@@ -17,13 +17,19 @@ namespace HobbyHarbor.Application.Handlers.QueryHandlers
 
 		public async Task<ICollection<Comment>> Handle(GetRepliesByCommentId request, CancellationToken cancellationToken)
 		{
-			var replyToRequested = _context.Comments.Where(x => x.ReplyCommentId == request.Id).Select(x => new { x.Id, x.ReplyCommentId }).AsNoTracking().ToList();
-			var allReplies = _context.Comments.Where(x => x.ReplyCommentId != null).Select(x => new { x.Id, x.ReplyCommentId }).AsNoTracking().ToList();
+			var replyToRequested = _context.Comments.Where(x => x.ReplyCommentId == request.Id)
+				.Select(x => new { x.Id, x.ReplyCommentId })
+				.AsNoTracking().ToList();
+			var allReplies = _context.Comments.Where(x => x.ReplyCommentId != null)
+				.Select(x => new { x.Id, x.ReplyCommentId })
+				.AsNoTracking().ToList();
 			List<int> nestedIds = replyToRequested.Select(x => x.Id).ToList();
 			
 			GetHierarchy(replyToRequested, allReplies, nestedIds);
-			IQueryable<Comment> query = _context.Comments.Where(x => nestedIds.Contains(x.Id)).Include(x => x.Author).ThenInclude(x => x.Profile).ThenInclude(x => x.Images)
+			IQueryable<Comment> query = _context.Comments.Where(x => nestedIds.Contains(x.Id))
+				.Include(x => x.Author).ThenInclude(x => x.Profile).ThenInclude(x => x.Images)
 				.Include(x => x.Reactions).Include(x => x.ReplyTo).OrderBy(x => x.Time);
+
 			return await query.ToListAsync();
 		}
 

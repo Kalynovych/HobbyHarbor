@@ -138,7 +138,7 @@
   <data name="SignIn" xml:space="preserve">
     <value>Sign In</value>
   </data>
-  <data name="SignUp" xml:space="preserve">
-    <value>Sign Up</value>
+  <data name="SignOut" xml:space="preserve">
+    <value>Sign Out</value>
   </data>
 </root>

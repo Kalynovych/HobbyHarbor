@@ -23,8 +23,14 @@
 				<a href="#">@_localizer["FindNewPeople"]</a>
 			</div>
 			<div>
-				<a href="#">@_localizer["SignIn"]</a>
-				<a href="#">@_localizer["SignUp"]</a>
+				@if (User.Identity.IsAuthenticated)
+				{
+					<a asp-controller="Home" asp-action="Logout">@_localizer["SignOut"]</a>
+				}
+				else 
+				{
+					<a asp-controller="Home" asp-action="Login">@_localizer["SignIn"]</a>
+				}
 			</div>
 		</nav>
 	</header>

@@ -10,10 +10,39 @@ builder.Services.AddControllersWithViews()
 	.AddDataAnnotationsLocalization()
 	.AddViewLocalization();
 
+builder.Services.AddHttpClient();
+
 builder.Services.AddStorage(builder.Configuration);
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddApplication();
 builder.Services.AddTransient<ExceptionHandlingMiddleware>();
+
+builder.Services.AddAuthentication(config =>
+{
+	config.DefaultScheme = "Cookie";
+	config.DefaultChallengeScheme = "oidc";
+})
+	.AddCookie("Cookie")
+	.AddOpenIdConnect("oidc", config =>
+	{
+		config.Authority = "https://localhost:5001/";
+		config.ClientId = "client_mvc";
+		config.ClientSecret = "client_secret";
+		config.ResponseType = "code";
+
+		config.UsePkce = true;
+		config.SaveTokens = true;
+
+		config.ResponseType = "code";
+		config.Scope.Add("api_one");
+		config.Scope.Add("profile");
+		config.Scope.Add("openid");
+		config.Scope.Add("email");
+		config.Scope.Add("offline_access");
+
+        config.SignedOutCallbackPath = "/Home/Index";
+        config.GetClaimsFromUserInfoEndpoint = true;
+	});
 
 builder.Services.AddLocalization(options =>
 {

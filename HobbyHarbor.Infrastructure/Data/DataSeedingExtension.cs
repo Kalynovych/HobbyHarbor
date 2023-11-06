@@ -190,11 +190,11 @@ namespace HobbyHarbor.Infrastructure.Data
 		private static void SeedUsers(ModelBuilder builder)
         {
             builder.Entity<User>().HasData(
-                new User { Id = 1, Email = "mail@gmail.com", IsPremium = true, Password = "password", Username = "username1", LastActivity = DateTime.Now.AddDays(-1).AddHours(-2).AddMinutes(-10) },
-                new User { Id = 2, Email = "mymail@gmail.com", IsPremium = false, Password = "password", Username = "username2", LastActivity = DateTime.Now },
-                new User { Id = 3, Email = "mail@ukr.net", IsPremium = false, Password = "password", Username = "username3", LastActivity = DateTime.Now },
-                new User { Id = 4, Email = "mail@gmail.com", IsPremium = true, Password = "password", Username = "username4", LastActivity = DateTime.Now },
-                new User { Id = 5, Email = "anothermail@gmail.com", IsPremium = false, Password = "password", Username = "username5", LastActivity = DateTime.Now });
+                new User { Id = 1, Email = "mail@gmail.com", IsPremium = true, Username = "username1", LastActivity = DateTime.Now.AddDays(-1).AddHours(-2).AddMinutes(-10) },
+                new User { Id = 2, Email = "mymail@gmail.com", IsPremium = false,  Username = "username2", LastActivity = DateTime.Now },
+                new User { Id = 3, Email = "mail@ukr.net", IsPremium = false, Username = "username3", LastActivity = DateTime.Now },
+                new User { Id = 4, Email = "mail@gmail.com", IsPremium = true, Username = "username4", LastActivity = DateTime.Now },
+                new User { Id = 5, Email = "anothermail@gmail.com", IsPremium = false, Username = "username5", LastActivity = DateTime.Now });
         }
 
         private static void SeedUserChoices(ModelBuilder builder)

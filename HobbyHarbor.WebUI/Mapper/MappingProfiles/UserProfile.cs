@@ -1,4 +1,5 @@
 ﻿using HobbyHarbor.Core.Entities;
+using HobbyHarbor.WebUI.Mapper.ValueResolvers;
 using HobbyHarbor.WebUI.MappingProfiles;
 using HobbyHarbor.WebUI.Models;
 
@@ -18,8 +19,8 @@ namespace HobbyHarbor.WebUI.Mapper.MappingProfiles
                 .ForMember(dest => dest.About, opt => opt.MapFrom(src => src.Profile.About))
                 .ForMember(dest => dest.PublicChatsAmount, opt => opt.MapFrom(src => src.PublicChats != null ? src.PublicChats.Count : 0))
                 .ForMember(dest => dest.PrivateChatsAmount, opt => opt.MapFrom(src => src.PrivateChats != null ? src.PrivateChats.Count : 0))
-                .ForMember(dest => dest.ProfileImage, opt => opt.MapFrom(src => src.Profile.Images.ElementAt(0)))
-                .ForMember(dest => dest.BannerImage, opt => opt.MapFrom(src => src.Profile.Images.ElementAt(1)))
+                .ForMember(dest => dest.ProfileImage, opt => opt.MapFrom<ProfileImageValueResolver>())
+                .ForMember(dest => dest.BannerImage, opt => opt.MapFrom<BannerImageValueResolver>())
                 .ForMember(dest => dest.GalleryImages, opt => opt.MapFrom(src => src.Profile.Images.Count > 2 ? src.Profile.Images.Skip(2) : null))
                 .ForMember(dest => dest.OnlineStatus, opt => opt.ConvertUsing<OnlineStatusValueConverter, DateTime>(src => src.LastActivity));
         }
