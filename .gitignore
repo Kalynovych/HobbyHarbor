@@ -364,3 +364,4 @@ FodyWeavers.xsd
 /HobbyHarbor.WebUI/wwwroot/js/main-min.js
 /HobbyHarbor.WebUI/wwwroot/css/StyleSheet.css
 /HobbyHarbor.WebUI/wwwroot/js/main.js
+/IdentityServer/tempkey.jwk
