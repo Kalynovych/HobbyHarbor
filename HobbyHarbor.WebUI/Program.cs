@@ -40,7 +40,8 @@ builder.Services.AddAuthentication(config =>
 		config.Scope.Add("email");
 		config.Scope.Add("offline_access");
 
-        config.SignedOutCallbackPath = "/Home/Index";
+		config.AccessDeniedPath = "/Home/Index";
+		config.SignedOutCallbackPath = "/Home/Index";
         config.GetClaimsFromUserInfoEndpoint = true;
 	});
 

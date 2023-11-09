@@ -1,63 +1,62 @@
 ﻿@using IdentityServer.Models
 @model LoginViewModel
 
-<div class="login-page">
-	<div class="lead">
-		<h1>Login</h1>
-	</div>
 
-	<div class="row">
+<div class="lead">
+	<h1>Login</h1>
+</div>
 
-		@if (Model.EnableLocalLogin)
-		{
-			<div class="col-sm-6">
-				<div class="card">
+<div class="row">
+	<div class="col-sm-6 form-wrapper">
+		<div class="card">
+			<div class="card-body">
+				<span>@ViewData["UserNotFound"]</span>
+				<form asp-route="Login">
+					<input type="hidden" asp-for="ReturnUrl" />
 
-					<div class="card-body">
-						<span>@ViewData["UserNotFound"]</span>
-						<form asp-route="Login">
-							<input type="hidden" asp-for="ReturnUrl" />
-
-							<div class="form-group">
-								<label asp-for="Email"></label>
-								<input class="form-control" placeholder="Email" asp-for="Email" autofocus>
-								<span asp-validation-for="Email"></span>
-							</div>
-							<div class="form-group">
-								<label asp-for="Password"></label>
-								<input type="password" class="form-control" placeholder="Password" asp-for="Password" autocomplete="off">
-								<span asp-validation-for="Password"></span>
-							</div>
-							@if (Model.AllowRememberLogin)
-							{
-								<div class="form-group">
-									<div class="form-check">
-										<input class="form-check-input" asp-for="RememberLogin">
-										<label class="form-check-label" asp-for="RememberLogin">
-											Remember My Login
-										</label>
-									</div>
-								</div>
-							}
-							<button class="btn btn-primary" name="button" value="login">Login</button>
-							<button class="btn btn-secondary" name="button" value="cancel">Cancel</button>
-						</form>
-
-						<a asp-controller="Account" asp-action="Register" asp-route-returnUrl="@Model.ReturnUrl">Or register new account</a>
+					<div class="form-group">
+						<label asp-for="Email"></label>
+						<input class="form-control" placeholder="Email" asp-for="Email" autofocus>
+						<span asp-validation-for="Email"></span>
 					</div>
-				</div>
+					<div class="form-group">
+						<label asp-for="Password"></label>
+						<input type="password" class="form-control" placeholder="Password" asp-for="Password" autocomplete="off">
+						<span asp-validation-for="Password"></span>
+					</div>
+					@if (Model.AllowRememberLogin)
+					{
+						<div class="form-group">
+							<div class="form-check">
+								<input class="form-check-input" asp-for="RememberLogin">
+								<label class="form-check-label" asp-for="RememberLogin">
+									Remember My Login
+								</label>
+							</div>
+						</div>
+					}
+					<button class="btn btn-primary" name="button" value="login">Login</button>
+					<button class="btn btn-secondary" name="button" value="cancel">Cancel</button>
+				</form>
+
+				<a asp-controller="Account" asp-action="Register" asp-route-returnUrl="@Model.ReturnUrl">Register new account</a>
 			</div>
-		}
-		<form asp-controller="Account" asp-action="ExternalLogin"
-			  asp-route-returnUrl="@Model.ReturnUrl" method="post">
-			@foreach (var provider in Model.ExternalProviders)
-			{
-				<button name="provider"
-						type="submit"
-						value="@provider.Name">
-					@provider.Name
-				</button>
-			}
-		</form>
+			<form asp-controller="Account" asp-action="ExternalLogin"
+				  asp-route-returnUrl="@Model.ReturnUrl" method="post">
+				<div class="external">
+					<label class="external-label">Or login with</label>
+				</div>
+				<div>
+					@foreach (var provider in Model.ExternalProviders)
+					{
+						<button class="btn btn-primary external-button" name="provider"
+								type="submit"
+								value="@provider.Name">
+							@provider.Name
+						</button>
+					}
+				</div>
+			</form>
+		</div>
 	</div>
 </div>

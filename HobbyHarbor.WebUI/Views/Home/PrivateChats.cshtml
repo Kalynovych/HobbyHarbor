@@ -1,0 +1,13 @@
+﻿@model ICollection<PrivateChatViewModel>
+
+<div class="private-chats">
+	<div>
+		@foreach (var privateChat in Model)
+		{
+			<vc:private-chat model="@privateChat"></vc:private-chat>
+		}
+	</div>
+
+	<div class="message-section">
+	</div>
+</div>

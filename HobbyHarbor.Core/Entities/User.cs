@@ -20,9 +20,7 @@
 
 		public ICollection<UserChoice>? Choices { get; set; }
 
-        public ICollection<PrivateMessage> PrivateMessages { get; set; }
-
-        public ICollection<PublicMessage> PublicMessages { get; set; }
+        public ICollection<Message> Messages { get; set; }
 
         public ICollection<PrivateChat>? PrivateChats { get; set; }
 

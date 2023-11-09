@@ -20,6 +20,7 @@ namespace HobbyHarbor.Application.Handlers.CommandHandlers
 			{
 				Username = request.UserName,
 				Email = request.Email,
+				LastActivity = DateTime.UtcNow,
 				Profile = new Profile { Name = request.UserName, Images = new List<ProfileImage>() },
 			};
 

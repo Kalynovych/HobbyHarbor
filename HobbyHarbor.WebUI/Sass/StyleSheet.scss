@@ -21,6 +21,9 @@ h1, a, h2 {
 }
 
 body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     background-color: $secondary-color;
 }
 
@@ -439,7 +442,51 @@ header {
     border-radius: 10px 10px;
 }
 
+.private-chats {
+    display: flex;
+    border: 1px solid $border-color;
+    border-radius: 10px 10px;
+    height: 80vh;
+}
+
+.message-section {
+    border-left: 2px solid $border-color;
+}
+
+.private-chat-wrapper {
+    display: flex;
+    align-items: center;
+    border: 1px solid $border-color;
+    border-radius: 10px 10px;
+    padding: 5px;
+    margin: 10px;
+    width: 350px;
+}
+
+.private-chat-info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    p {
+        margin: 0;
+        margin-left: 10px;
+    }
+}
+
+.private-chat-companion {
+    display: flex;
+    justify-content: space-between;
+
+    p {
+        color: $secondary-text-color;
+        font-weight: 500;
+        font-size: 20px;
+    }
+}
+
 footer {
+    margin-top: auto;
     display: flex;
 
     div {

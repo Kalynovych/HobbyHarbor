@@ -1,0 +1,17 @@
+﻿@using System.Collections.ObjectModel;
+
+@inject IViewLocalizer _localizer
+@model PrivateChatViewModel
+
+<div class="private-chat-wrapper">
+	<img class="comment-profile-image" src="data:image/jpg;base64,@Model.CompanionProfileImage" alt="@_localizer["ProfileBanner"]" />
+	<div class="private-chat-info">
+		<div class="private-chat-companion">
+			<p>@Model.CompanionName</p>
+			<p>@Model.LastMessageTime.ToShortTimeString()</p>
+		</div>
+		<div class="private-chat-last-message">
+			<p>@Model.LastMessageAuthor @Model.LastMessage</p>
+		</div>
+	</div>
+</div>

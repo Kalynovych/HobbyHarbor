@@ -8,6 +8,7 @@ using HobbyHarbor.Application.Queries;
 using Microsoft.AspNetCore.Authentication;
 using IdentityModel.Client;
 using HobbyHarbor.Application.Commands;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HobbyHarbor.WebUI.Controllers
 {
@@ -25,17 +26,17 @@ namespace HobbyHarbor.WebUI.Controllers
 			_mediator = mediator;
 			_httpClientFactory = httpClientFactory;
 		}
+
 		public async Task<IActionResult> Index()
 		{
 			if (User.Identity.IsAuthenticated)
 			{
-				var username = User.Claims.Where(x => x.Type == "name").Select(x => x.Value).FirstOrDefault();
+				var username = GetUsername();
 
 				User user = await _mediator.Send(new GetUserByUsername { Username = username });
 				if (user == null)
 				{
-					var email = User.Claims.Where(x => x.Type == "email").Select(x => x.Value).FirstOrDefault();
-					user = await _mediator.Send(new CreateUser { UserName = username, Email = email });
+					user = await _mediator.Send(new CreateUser { UserName = username, Email = GetEmail() });
 				}
 
 				user.Posts = await _mediator.Send(new GetPostsByCreatorId { Id = user.Id, Take = 10 });
@@ -43,6 +44,20 @@ namespace HobbyHarbor.WebUI.Controllers
 			}
 
 			return View();
+		}
+
+		[Authorize]
+		public async Task<IActionResult> PrivateChats()
+		{
+			var privateChats = await _mediator.Send(new GetPrivateChatsByUsername { Username = GetUsername() });
+			var privateChatsViewModels = _mapper.Map<ICollection<PrivateChatViewModel>>(privateChats);
+
+			foreach (var privateChatViewModel in privateChatsViewModels)
+			{
+				privateChatViewModel.LastMessageAuthor = privateChatViewModel.LastMessageAuthor == GetUsername() ? "you:" : ""; 
+			}
+
+            return View(privateChatsViewModels);
 		}
 
 		public async Task<IActionResult> Login()
@@ -66,9 +81,14 @@ namespace HobbyHarbor.WebUI.Controllers
 			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 		}
 
-		private async Task CreateLocalUserAsync()
+		private string GetUsername()
 		{
+			return User.Claims.Where(x => x.Type == "name").Select(x => x.Value).FirstOrDefault();
+		}
 
+		private string GetEmail()
+		{
+			return User.Claims.Where(x => x.Type == "email").Select(x => x.Value).FirstOrDefault();
 		}
 
 		private async Task RefreshTokenAsync()

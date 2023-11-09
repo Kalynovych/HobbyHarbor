@@ -291,9 +291,11 @@ namespace IdentityServer.Controllers
 
         private async Task<LoginViewModel> BuildLoginViewModelAsync(LoginInputModel model)
         {
-            var vm = await BuildLoginViewModelAsync(model.ReturnUrl);
+			var externalProviders = await _signInManager.GetExternalAuthenticationSchemesAsync();
+			var vm = await BuildLoginViewModelAsync(model.ReturnUrl);
             vm.Email = model.Email;
             vm.RememberLogin = model.RememberLogin;
+            vm.ExternalProviders = externalProviders;
             return vm;
         }
 

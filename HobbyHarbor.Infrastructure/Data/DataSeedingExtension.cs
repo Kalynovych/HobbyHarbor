@@ -138,7 +138,8 @@ namespace HobbyHarbor.Infrastructure.Data
 				new PrivateMessage { Id = 1, AttachmentTypeId = 1, Attachment = "pathToAttachment", CreatorId = 1, 
                     CompanionId = 2, MessageText = "message1", Time = DateTime.Now, MessageAuthorId = 1 },
 				new PrivateMessage { Id = 2, CreatorId = 1, CompanionId = 2, MessageText = "message2", Time = DateTime.Now, MessageAuthorId = 2, ReplyMessageId = 1 },
-				new PrivateMessage { Id = 3, CreatorId = 1, CompanionId = 2, MessageText = "message3", Time = DateTime.Now, MessageAuthorId = 1 });
+				new PrivateMessage { Id = 3, CreatorId = 1, CompanionId = 2, MessageText = "message3", Time = DateTime.Now, MessageAuthorId = 2 },
+				new PrivateMessage { Id = 4, CreatorId = 1, CompanionId = 3, MessageText = "message4", Time = DateTime.Now, MessageAuthorId = 1 });
 		}
 
 		private static void SeedProfiles(ModelBuilder builder)
@@ -160,7 +161,9 @@ namespace HobbyHarbor.Infrastructure.Data
                 new ProfileImage { Id = 3, ProfileId = 1, Image = $"{directory}/wwwroot/images/ProfileStubImage.jpg" },
 				new ProfileImage { Id = 4, ProfileId = 1, Image = $"{directory}/wwwroot/images/ProfileStubImage.jpg" },
 				new ProfileImage { Id = 5, ProfileId = 1, Image = $"{directory}/wwwroot/images/ProfileStubImage.jpg" },
-				new ProfileImage { Id = 6, ProfileId = 2, Image = $"{directory}/wwwroot/images/ProfileStubImage.jpg" });
+				new ProfileImage { Id = 6, ProfileId = 2, Image = $"{directory}/wwwroot/images/ProfileStubImage.jpg" },
+				new ProfileImage { Id = 7, ProfileId = 2, Image = $"{directory}/wwwroot/images/BannerStubImage.jpg" },
+				new ProfileImage { Id = 8, ProfileId = 3, Image = $"{directory}/wwwroot/images/ProfileStubImage.jpg" });
         }
 
         private static void SeedPublicChats(ModelBuilder builder)
@@ -182,9 +185,9 @@ namespace HobbyHarbor.Infrastructure.Data
 		private static void SeedPublicMessages(ModelBuilder builder)
 		{
 			builder.Entity<PublicMessage>().HasData(
-				new PublicMessage { Id = 1, AttachmentTypeId = 1, Attachment = "pathToAttachment", MessageText = "message1", Time = DateTime.Now, MessageAuthorId = 1, PublicChatId = 1 },
-				new PublicMessage { Id = 2, MessageText = "message2", Time = DateTime.Now, MessageAuthorId = 2, ReplyMessageId = 1, PublicChatId = 1 },
-				new PublicMessage { Id = 3, MessageText = "message3", Time = DateTime.Now, MessageAuthorId = 3, PublicChatId = 1 });
+				new PublicMessage { Id = 5, AttachmentTypeId = 1, Attachment = "pathToAttachment", MessageText = "message1", Time = DateTime.Now, MessageAuthorId = 1, PublicChatId = 1 },
+				new PublicMessage { Id = 6, MessageText = "message2", Time = DateTime.Now, MessageAuthorId = 2, ReplyMessageId = 1, PublicChatId = 1 },
+				new PublicMessage { Id = 7, MessageText = "message3", Time = DateTime.Now, MessageAuthorId = 3, PublicChatId = 1 });
 		}
 
 		private static void SeedUsers(ModelBuilder builder)

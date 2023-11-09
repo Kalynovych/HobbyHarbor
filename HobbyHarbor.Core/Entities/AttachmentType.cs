@@ -8,6 +8,6 @@
 
         public ICollection<Post> Posts { get; set; }
 
-        public ICollection<PrivateMessage> Messages { get; set; }
+        public ICollection<Message> Messages { get; set; }
     }
 }

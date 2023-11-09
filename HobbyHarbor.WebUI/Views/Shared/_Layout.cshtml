@@ -15,9 +15,9 @@
 	<header>
 		<nav class="border-bottom box-shadow mb-3">
 			<div>
-				<a class="header-logo" href="#">@_localizer["HobbyHarbor"]</a>
-				<a href="#">@_localizer["Home"]</a>
-				<a href="#">@_localizer["PrivateChats"]</a>
+				<a class="header-logo" asp-controller="Home" asp-action="Index">@_localizer["HobbyHarbor"]</a>
+				<a asp-controller="Home" asp-action="Index">@_localizer["Home"]</a>
+				<a asp-controller="Home" asp-action="PrivateChats">@_localizer["PrivateChats"]</a>
 				<a href="#">@_localizer["PublicChats"]</a>
 				<a href="#">@_localizer["Blog"]</a>
 				<a href="#">@_localizer["FindNewPeople"]</a>

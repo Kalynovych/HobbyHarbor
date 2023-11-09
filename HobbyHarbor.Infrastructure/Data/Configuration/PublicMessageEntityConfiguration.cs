@@ -8,21 +8,11 @@ namespace HobbyHarbor.Infrastructure.Data.Configuration
 	{
 		public void Configure(EntityTypeBuilder<PublicMessage> builder)
 		{
-			builder.HasKey(x => x.Id);
+			builder.ToTable("PublicMessage");
 
 			builder.HasOne(x => x.PublicChat)
 				.WithMany(x => x.Messages)
 				.HasForeignKey(x => x.PublicChatId)
-				.OnDelete(DeleteBehavior.NoAction);
-
-			builder.HasOne(x => x.MessageAuthor)
-				.WithMany(x => x.PublicMessages)
-				.HasForeignKey(x => x.MessageAuthorId)
-				.OnDelete(DeleteBehavior.NoAction);
-
-			builder.HasOne(x => x.ReplyTo)
-				.WithMany()
-				.HasForeignKey(x => x.ReplyMessageId)
 				.OnDelete(DeleteBehavior.NoAction);
 		}
 	}
