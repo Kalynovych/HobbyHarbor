@@ -9,10 +9,12 @@ namespace HobbyHarbor.Application.Handlers.QueryHandlers
 	public class GetPrivateChatsByUsernameQueryHandler : IRequestHandler<GetPrivateChatsByUsername, ICollection<PrivateChat>>
 	{
 		IHobbyHarborDbContext _context;
+		IFileStorageService _fileStorageService;
 
-		public GetPrivateChatsByUsernameQueryHandler(IHobbyHarborDbContext context)
+		public GetPrivateChatsByUsernameQueryHandler(IHobbyHarborDbContext context, IFileStorageService storageService)
 		{
 			_context = context;
+			_fileStorageService = storageService;
 		}
 
 		public async Task<ICollection<PrivateChat>> Handle(GetPrivateChatsByUsername request, CancellationToken cancellationToken)

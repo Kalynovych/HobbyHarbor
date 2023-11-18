@@ -1,4 +1,4 @@
-using HobbyHarbor.Application;
+using HobbyHarbor.Application.Interfaces;
 using HobbyHarbor.Infrastructure;
 using HobbyHarbor.Infrastructure.Data;
 using HobbyHarbor.WebUI.Middlewares;
@@ -14,8 +14,9 @@ builder.Services.AddHttpClient();
 
 builder.Services.AddStorage(builder.Configuration);
 builder.Services.AddAutoMapper(typeof(Program));
-builder.Services.AddApplication();
+
 builder.Services.AddTransient<ExceptionHandlingMiddleware>();
+builder.Services.AddScoped<IFileStorageService, LocalFileStorageService>();
 
 builder.Services.AddAuthentication(config =>
 {

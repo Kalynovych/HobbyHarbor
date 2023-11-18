@@ -1,7 +1,8 @@
-﻿using HobbyHarbor.Application.DTOs;
+﻿using System.Diagnostics.Contracts;
+using HobbyHarbor.Application.DTOs;
 using HobbyHarbor.Core.Entities;
 
-namespace HobbyHarbor.WebUI.Mapper.MappingProfiles
+namespace HobbyHarbor.Application.Mapper.MappingProfiles
 {
     public class PrivateMessageProfile : MessageProfile
 	{

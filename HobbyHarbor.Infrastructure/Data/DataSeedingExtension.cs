@@ -1,4 +1,6 @@
-﻿using HobbyHarbor.Core.Entities;
+﻿using Azure.Identity;
+using Azure.Storage.Blobs;
+using HobbyHarbor.Core.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,7 +23,7 @@ namespace HobbyHarbor.Infrastructure.Data
 
         public static void Seed(this ModelBuilder builder)
         {
-            SeedAttachmentTypes(builder);
+			SeedAttachmentTypes(builder);
             SeedComments(builder);
             SeedCommentsReactions(builder);
             SeedInterests(builder);
@@ -154,16 +156,15 @@ namespace HobbyHarbor.Infrastructure.Data
 
         private static void SeedProfileImages(ModelBuilder builder)
         {
-            var directory = Directory.GetCurrentDirectory();
             builder.Entity<ProfileImage>().HasData(
-                new ProfileImage { Id = 1, ProfileId = 1, Image = $"{directory}/wwwroot/images/ProfileStubImage.jpg" },
-                new ProfileImage { Id = 2, ProfileId = 1, Image = $"{directory}/wwwroot/images/BannerStubImage.jpg" },
-                new ProfileImage { Id = 3, ProfileId = 1, Image = $"{directory}/wwwroot/images/ProfileStubImage.jpg" },
-				new ProfileImage { Id = 4, ProfileId = 1, Image = $"{directory}/wwwroot/images/ProfileStubImage.jpg" },
-				new ProfileImage { Id = 5, ProfileId = 1, Image = $"{directory}/wwwroot/images/ProfileStubImage.jpg" },
-				new ProfileImage { Id = 6, ProfileId = 2, Image = $"{directory}/wwwroot/images/ProfileStubImage.jpg" },
-				new ProfileImage { Id = 7, ProfileId = 2, Image = $"{directory}/wwwroot/images/BannerStubImage.jpg" },
-				new ProfileImage { Id = 8, ProfileId = 3, Image = $"{directory}/wwwroot/images/ProfileStubImage.jpg" });
+                new ProfileImage { Id = 1, ProfileId = 1, Image = "/shared/ProfileStubImage.jpg" },
+                new ProfileImage { Id = 2, ProfileId = 1, Image = "/shared/BannerStubImage.jpg" },
+                new ProfileImage { Id = 3, ProfileId = 1, Image = "/shared/ProfileStubImage.jpg" },
+				new ProfileImage { Id = 4, ProfileId = 1, Image = "/shared/ProfileStubImage.jpg" },
+				new ProfileImage { Id = 5, ProfileId = 1, Image = "/shared/ProfileStubImage.jpg" },
+				new ProfileImage { Id = 6, ProfileId = 2, Image = "/shared/ProfileStubImage.jpg" },
+				new ProfileImage { Id = 7, ProfileId = 2, Image = "/shared/BannerStubImage.jpg" },
+				new ProfileImage { Id = 8, ProfileId = 3, Image = "/shared/ProfileStubImage.jpg" });
         }
 
         private static void SeedPublicChats(ModelBuilder builder)

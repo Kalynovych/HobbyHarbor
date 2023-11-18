@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Localization;
 
-namespace HobbyHarbor.WebUI.MappingProfiles
+namespace HobbyHarbor.WebUI.Mapper.ValueConverters
 {
 	public class SexValueConverter : IValueConverter<string, string>
 	{

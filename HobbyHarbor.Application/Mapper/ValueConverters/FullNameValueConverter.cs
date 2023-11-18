@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace HobbyHarbor.WebUI.Mapper.ValueConverters
+namespace HobbyHarbor.Application.Mapper.ValueConverters
 {
 	public class FullNameValueConverter : IValueConverter<Core.Entities.Profile, string>
 	{

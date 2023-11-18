@@ -1,28 +1,36 @@
 ﻿using AutoMapper;
-using HobbyHarbor.Core.Entities;
+using HobbyHarbor.Application.DTOs;
+using HobbyHarbor.Application.Interfaces;
+using HobbyHarbor.Application.Mapper.ValueConverters;
 using HobbyHarbor.WebUI.Models;
 
 namespace HobbyHarbor.WebUI.Mapper.ValueResolvers
 {
-	public class ProfileImageValueResolver : IValueResolver<User, ProfileViewModel, ImageModel>
+	public class ProfileImageValueResolver : IValueResolver<ProfileDTO, ProfileViewModel, ImageModel>
 	{
-		public ImageModel Resolve(User source, ProfileViewModel destination, ImageModel destMember, ResolutionContext context)
+		private readonly IFileStorageService _fileStorageService;
+
+		public ProfileImageValueResolver(IFileStorageService fileStorageService)
 		{
-			FileToBase64ValueConverter converter = new FileToBase64ValueConverter();
-			ICollection<ProfileImage> images = source.Profile.Images;
+			_fileStorageService = fileStorageService;
+		}
+
+		public ImageModel Resolve(ProfileDTO source, ProfileViewModel destination, ImageModel destMember, ResolutionContext context)
+		{
+			FileToBase64ValueConverter converter = new FileToBase64ValueConverter(_fileStorageService);
+			ICollection<ImageDTO> images = source.Images;
 			ImageModel bannerImage;
 
 			if (images.Count == 0)
 			{
-				var directory = Directory.GetCurrentDirectory();
-				bannerImage = new ImageModel { Image = converter.Convert($"{directory}/wwwroot/images/ProfileStubImage.jpg", context) };
+				bannerImage = new ImageModel { Image = converter.Convert("/shared/ProfileStubImage.jpg", context) };
 				return bannerImage;
 			}
 
 			bannerImage = new ImageModel
 			{
 				Id = images.ElementAt(0).Id,
-				Image = converter.Convert(images.ElementAt(0).Image, context)
+				Image = images.ElementAt(0).Image
 			};
 
 			return bannerImage;

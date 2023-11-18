@@ -1,9 +1,18 @@
+using HobbyHarbor.Application;
+using HobbyHarbor.Application.Interfaces;
+using HobbyHarbor.Infrastructure;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddStorage(builder.Configuration);
+builder.Services.AddAutoMapper(typeof(DependencyInjection));
+builder.Services.AddApplication();
+builder.Services.AddScoped<IFileStorageService, LocalFileStorageService>();
+
 builder.Services.AddSwaggerGen(options =>
 {
 	options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -51,6 +60,6 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers().RequireAuthorization("ApiScope"); ;
+app.MapControllers().RequireAuthorization("ApiScope");
 
 app.Run();

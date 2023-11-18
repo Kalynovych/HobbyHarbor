@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
+using HobbyHarbor.WebUI;
 using Microsoft.Extensions.Localization;
 
-namespace HobbyHarbor.WebUI.MappingProfiles
+namespace HobbyHarbor.WebUi.Mapper.ValueConverters
 {
 	public class OnlineStatusValueConverter : IValueConverter<DateTime, string>
 	{

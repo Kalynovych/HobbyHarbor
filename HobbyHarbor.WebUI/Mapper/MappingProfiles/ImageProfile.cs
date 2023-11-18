@@ -1,4 +1,4 @@
-﻿using HobbyHarbor.Core.Entities;
+﻿using HobbyHarbor.Application.DTOs;
 using HobbyHarbor.WebUI.Models;
 
 namespace HobbyHarbor.WebUI.Mapper.MappingProfiles
@@ -7,8 +7,7 @@ namespace HobbyHarbor.WebUI.Mapper.MappingProfiles
     {
         public ImageProfile()
         {
-            CreateMap<ProfileImage, ImageModel>()
-                .ForMember(dist => dist.Image, opt => opt.ConvertUsing<FileToBase64ValueConverter, string?>(src => src.Image));
+            CreateMap<ImageDTO, ImageModel>();
         }
     }
 }

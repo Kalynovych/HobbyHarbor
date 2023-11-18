@@ -2,13 +2,11 @@
 using HobbyHarbor.WebUI.Models;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
-using HobbyHarbor.Core.Entities;
-using MediatR;
-using HobbyHarbor.Application.Queries;
 using Microsoft.AspNetCore.Authentication;
 using IdentityModel.Client;
-using HobbyHarbor.Application.Commands;
 using Microsoft.AspNetCore.Authorization;
+using HobbyHarbor.Application.DTOs;
+using System.Net;
 
 namespace HobbyHarbor.WebUI.Controllers
 {
@@ -16,14 +14,12 @@ namespace HobbyHarbor.WebUI.Controllers
 	{
 		private readonly ILogger<HomeController> _logger;
 		private readonly IMapper _mapper;
-		private readonly IMediator _mediator;
 		private readonly IHttpClientFactory _httpClientFactory;
 
-		public HomeController(ILogger<HomeController> logger, IMapper mapper, IMediator mediator, IHttpClientFactory httpClientFactory)
+		public HomeController(ILogger<HomeController> logger, IMapper mapper, IHttpClientFactory httpClientFactory)
 		{
 			_logger = logger;
 			_mapper = mapper;
-			_mediator = mediator;
 			_httpClientFactory = httpClientFactory;
 		}
 
@@ -31,15 +27,30 @@ namespace HobbyHarbor.WebUI.Controllers
 		{
 			if (User.Identity.IsAuthenticated)
 			{
-				var username = GetUsername();
+				HttpClient client = await GetAuthorizedClient();
 
-				User user = await _mediator.Send(new GetUserByUsername { Username = username });
-				if (user == null)
+				var response = await client.GetAsync("users/" + GetUsername());
+				ProfileDTO user = new ProfileDTO();
+				if (response.IsSuccessStatusCode)
 				{
-					user = await _mediator.Send(new CreateUser { UserName = username, Email = GetEmail() });
+					user = await response.Content.ReadFromJsonAsync<ProfileDTO>();
+				}
+				else if (response.StatusCode == HttpStatusCode.NotFound)
+				{
+					response = await client.PostAsJsonAsync("users", new ProfileDTO { Username = GetUsername(), Email = GetEmail() });
+					if (response.IsSuccessStatusCode)
+					{
+						user = await response.Content.ReadFromJsonAsync<ProfileDTO>();
+					}
 				}
 
-				user.Posts = await _mediator.Send(new GetPostsByCreatorId { Id = user.Id, Take = 10 });
+				response = await client.GetAsync("posts/" + user.Id);
+				if (response.IsSuccessStatusCode)
+				{
+					user.Posts = await response.Content.ReadFromJsonAsync<ICollection<PostDTO>>();
+				}
+
+				await RefreshTokenAsync();
 				return View(_mapper.Map<ProfileViewModel>(user));
 			}
 
@@ -49,15 +60,28 @@ namespace HobbyHarbor.WebUI.Controllers
 		[Authorize]
 		public async Task<IActionResult> PrivateChats()
 		{
-			var privateChats = await _mediator.Send(new GetPrivateChatsByUsername { Username = GetUsername() });
-			var privateChatsViewModels = _mapper.Map<ICollection<PrivateChatViewModel>>(privateChats);
-
-			foreach (var privateChatViewModel in privateChatsViewModels)
+			HttpClient client = await GetAuthorizedClient();
+			var response = await client.GetAsync("privateChats/" + GetUsername());
+			if (response.IsSuccessStatusCode)
 			{
-				privateChatViewModel.LastMessageAuthor = privateChatViewModel.LastMessageAuthor == GetUsername() ? "you:" : ""; 
+				var privateChats = await response.Content.ReadFromJsonAsync<ICollection<PrivateChatDTO>>();
+				await RefreshTokenAsync();
+
+				return View(_mapper.Map<ICollection<PrivateChatViewModel>>(privateChats));
 			}
 
-            return View(privateChatsViewModels);
+			return View("Error");
+		}
+
+		[Authorize]
+		public async Task<HttpClient> GetAuthorizedClient()
+		{
+			var accessToken = await HttpContext.GetTokenAsync("access_token");
+
+			var client = new HttpClient();
+			client.BaseAddress = new Uri("https://localhost:7071/api/v1/");
+			client.SetBearerToken(accessToken);
+			return client;
 		}
 
 		public async Task<IActionResult> Login()

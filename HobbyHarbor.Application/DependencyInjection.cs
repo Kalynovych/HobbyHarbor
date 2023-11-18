@@ -1,5 +1,4 @@
-﻿using HobbyHarbor.Application.Queries;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace HobbyHarbor.Application
 {
@@ -7,7 +6,7 @@ namespace HobbyHarbor.Application
 	{
 		public static void AddApplication(this IServiceCollection services)
 		{
-			services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetUserById).Assembly));
+			services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));
 		}
 	}
 }
