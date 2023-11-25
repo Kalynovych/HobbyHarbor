@@ -1,9 +1,9 @@
-﻿@using System.Collections.ObjectModel;
-
-@inject IViewLocalizer _localizer
+﻿@inject IViewLocalizer _localizer
 @model PrivateChatViewModel
 
-<div class="private-chat-wrapper">
+<div class="private-chat-wrapper" data-creatorId="@Model.CreatorId" data-companionId="@Model.CompanionId"
+	onclick="onPrivateChatClick('@Model.CreatorId', '@Model.CompanionId')"
+	oncontextmenu="onPrivateChatContextMenu(event, '@Model.CreatorId', '@Model.CompanionId')">
 	<img class="comment-profile-image" src="data:image/jpg;base64,@Model.CompanionProfileImage" alt="@_localizer["ProfileBanner"]" />
 	<div class="private-chat-info">
 		<div class="private-chat-companion">
@@ -11,7 +11,10 @@
 			<p>@Model.LastMessageTime.ToShortTimeString()</p>
 		</div>
 		<div class="private-chat-last-message">
-			<p>@Model.LastMessageAuthor @Model.LastMessage</p>
+			@{
+				string prefix = Model.LastMessageAuthor == User.FindFirst("name")?.Value ? _localizer["MessagePrefix"].Value : "";
+				<p>@prefix @Model.LastMessage</p>
+			}
 		</div>
 	</div>
 </div>

@@ -24,9 +24,13 @@ namespace HobbyHarbor.Infrastructure.Data
 
         public DbSet<InterestCategory> InterestCategories { get; set; }
 
-        public DbSet<PrivateMessage> Messages { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
-        public DbSet<Payment> Payments { get; set; }
+		public DbSet<PrivateMessage> PrivateMessages { get; set; }
+
+		public DbSet<PublicMessage> PublicMessages { get; set; }
+
+		public DbSet<Payment> Payments { get; set; }
 
         public DbSet<PostInterest> PostInterests { get; set; }
 

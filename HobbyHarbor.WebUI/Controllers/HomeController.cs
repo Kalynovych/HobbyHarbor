@@ -30,7 +30,12 @@ namespace HobbyHarbor.WebUI.Controllers
 				HttpClient client = await GetAuthorizedClient();
 
 				var response = await client.GetAsync("users/" + GetUsername());
-				ProfileDTO user = new ProfileDTO();
+				if (response.StatusCode == HttpStatusCode.Unauthorized)
+				{
+					return RedirectToAction("Logout");
+				}
+
+				ProfileDTO user = new();
 				if (response.IsSuccessStatusCode)
 				{
 					user = await response.Content.ReadFromJsonAsync<ProfileDTO>();
@@ -50,7 +55,6 @@ namespace HobbyHarbor.WebUI.Controllers
 					user.Posts = await response.Content.ReadFromJsonAsync<ICollection<PostDTO>>();
 				}
 
-				await RefreshTokenAsync();
 				return View(_mapper.Map<ProfileViewModel>(user));
 			}
 
@@ -65,23 +69,11 @@ namespace HobbyHarbor.WebUI.Controllers
 			if (response.IsSuccessStatusCode)
 			{
 				var privateChats = await response.Content.ReadFromJsonAsync<ICollection<PrivateChatDTO>>();
-				await RefreshTokenAsync();
 
 				return View(_mapper.Map<ICollection<PrivateChatViewModel>>(privateChats));
 			}
 
 			return View("Error");
-		}
-
-		[Authorize]
-		public async Task<HttpClient> GetAuthorizedClient()
-		{
-			var accessToken = await HttpContext.GetTokenAsync("access_token");
-
-			var client = new HttpClient();
-			client.BaseAddress = new Uri("https://localhost:7071/api/v1/");
-			client.SetBearerToken(accessToken);
-			return client;
 		}
 
 		public async Task<IActionResult> Login()
@@ -107,19 +99,31 @@ namespace HobbyHarbor.WebUI.Controllers
 
 		private string GetUsername()
 		{
-			return User.Claims.Where(x => x.Type == "name").Select(x => x.Value).FirstOrDefault();
+			return User.FindFirst("name")?.Value;
 		}
 
 		private string GetEmail()
 		{
-			return User.Claims.Where(x => x.Type == "email").Select(x => x.Value).FirstOrDefault();
+			return User.FindFirst("email")?.Value;
+		}
+
+		[Authorize]
+		public async Task<HttpClient> GetAuthorizedClient()
+		{
+			await RefreshTokenAsync();
+			var accessToken = await HttpContext.GetTokenAsync("access_token");
+			
+			var client = new HttpClient();
+			client.BaseAddress = new Uri("https://localhost:7071/api/v1/");
+			client.SetBearerToken(accessToken);
+
+			return client;
 		}
 
 		private async Task RefreshTokenAsync()
 		{
 			var serverClient = _httpClientFactory.CreateClient();
 			var discoveryDocument = await serverClient.GetDiscoveryDocumentAsync("https://localhost:5001/");
-
 
 			var refreshToken = await HttpContext.GetTokenAsync("refresh_token");
 			var refreshTokenClient = _httpClientFactory.CreateClient();
@@ -128,6 +132,7 @@ namespace HobbyHarbor.WebUI.Controllers
 			{
 				Address = discoveryDocument.TokenEndpoint,
 				RefreshToken = refreshToken,
+				GrantType = "refresh_token",
 				ClientId = "client_mvc",
 				ClientSecret = "client_secret"
 			});

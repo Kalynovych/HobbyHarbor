@@ -14,15 +14,18 @@ namespace HobbyHarbor.Application.Mapper.ValueConverters
 
 		public string? Convert(string? path, ResolutionContext context)
 		{
-			string? resultString;
+			string? resultString = null;
 			try
 			{
 				using (Stream stream = _fileStorageService.DownloadFileAsync(path).Result)
 				{
-					stream.Position = 0;
-					byte[] bytes = new byte[stream.Length];
-					stream.Read(bytes, 0, bytes.Length);
-					resultString = System.Convert.ToBase64String(bytes);
+					if (stream != null)
+					{
+						stream.Position = 0;
+						byte[] bytes = new byte[stream.Length];
+						stream.Read(bytes, 0, bytes.Length);
+						resultString = System.Convert.ToBase64String(bytes);
+					}
 				}
 			}
 			catch

@@ -1,0 +1,25 @@
+﻿@inject IViewLocalizer _localizer
+@model MessageViewModel
+
+@{
+	bool isFromCurrentUser = Model.AuthorUsername == User.FindFirst("name")?.Value;
+	string fromCurrentUser = isFromCurrentUser ? "from-current-user" : "";
+}
+
+<div class="message-item @fromCurrentUser" oncontextmenu="onMessageContextMenu(event, '@Model.Id', '@isFromCurrentUser')">
+	<img class="message-profile-image" src="data:image/jpg;base64,@Model.AuthorProfileImage" />
+	<div class="message-wrapper" id="@Model.Id">
+		@if (Model.ReplyMessageId.HasValue)
+		{
+			<div class="message-reply" onclick="scrollToElement('@Model.ReplyMessageId')">@_localizer["ReplyTo"]: @Model.ReplyMessageText</div>
+		}
+		<div class="message-first-row">
+			<h3>@Model.AuthorName</h3>
+			<p onclick="onReplyClick('@Model.Id', '@Model.MessageText')">Reply</p>
+		</div>
+		<div class="message-second-row">
+			<p class="message-text">@Model.MessageText</p>
+			<p>@Model.Time</p>
+		</div>
+	</div>
+</div>

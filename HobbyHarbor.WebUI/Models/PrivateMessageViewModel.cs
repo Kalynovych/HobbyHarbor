@@ -2,5 +2,6 @@
 {
 	public class PrivateMessageViewModel : MessageViewModel
 	{
+		public string CompanionUsername { get; set; }
 	}
 }

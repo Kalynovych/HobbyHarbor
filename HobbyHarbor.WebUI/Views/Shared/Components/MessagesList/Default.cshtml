@@ -1,0 +1,9 @@
+﻿@model ICollection<MessageViewModel>
+
+@if (Model != null)
+{
+	@foreach (var message in Model)
+	{
+		<vc:message model="@message"></vc:message>
+	}
+}

@@ -15,7 +15,7 @@ namespace IdentityServer
 
 		public static IEnumerable<ApiScope> GetApis() => new List<ApiScope>() { new ApiScope("api_one") };
 
-		public static IEnumerable<Client> GetClients(IConfiguration config) =>
+		public static IEnumerable<Client> GetClients() =>
 			new List<Client>() {
 				new Client()
 				{

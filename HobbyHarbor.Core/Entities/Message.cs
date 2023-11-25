@@ -14,7 +14,9 @@
 
 		public int? ReplyMessageId { get; set; }
 
-		public PrivateMessage? ReplyTo { get; set; }
+		public Message? ReplyTo { get; set; }
+
+		public ICollection<Message>? Replies { get; set; }
 
 		public string? Attachment { get; set; }
 

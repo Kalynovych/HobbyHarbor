@@ -13,7 +13,7 @@ namespace HobbyHarbor.Infrastructure.Data.Configuration
             builder.HasOne(x => x.PrivateChat)
                 .WithMany(x => x.Messages)
                 .HasForeignKey(x => new { x.CreatorId, x.CompanionId})
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

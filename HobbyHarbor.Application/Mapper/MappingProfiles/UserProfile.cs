@@ -17,8 +17,7 @@ namespace HobbyHarbor.Application.Mapper.MappingProfiles
                 .ForMember(dest => dest.About, opt => opt.MapFrom(src => src.Profile.About))
                 .ForMember(dest => dest.PublicChatsAmount, opt => opt.MapFrom(src => src.PublicChats != null ? src.PublicChats.Count : 0))
                 .ForMember(dest => dest.PrivateChatsAmount, opt => opt.MapFrom(src => src.PrivateChats != null ? src.PrivateChats.Count : 0))
-                .ForMember(dest => dest.Images, opt => opt.MapFrom(src => src.Profile.Images))
-                .ForMember(dest => dest.OnlineStatus, opt => opt.MapFrom(src => src.LastActivity));
+                .ForMember(dest => dest.Images, opt => opt.MapFrom(src => src.Profile.Images));
         }
     }
 }

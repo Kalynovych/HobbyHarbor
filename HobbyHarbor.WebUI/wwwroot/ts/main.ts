@@ -9,7 +9,7 @@ function onCommentsClick() {
 
     $.ajax({
         type: "GET",
-        url: "/comments/getComments?postId=" + postId,
+        url: "/comment/getComments?postId=" + postId,
         success: function (result) {
             commentSection.find(".comments-wrapper").html(result);
             $(".comment-replies-button").on("click", onCommentRepliesClick);
@@ -27,7 +27,7 @@ function onCommentRepliesClick() {
 
     $.ajax({
         type: "GET",
-        url: "/comments/getReplies?commentId=" + commentId,
+        url: "/comment/getReplies?commentId=" + commentId,
         success: function (result) {
             replies.html(result);
         },

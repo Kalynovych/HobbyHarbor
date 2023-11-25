@@ -9,19 +9,19 @@ namespace HobbyHarbor.Application.Handlers.QueryHandlers
 	public class GetPrivateChatsByUsernameQueryHandler : IRequestHandler<GetPrivateChatsByUsername, ICollection<PrivateChat>>
 	{
 		IHobbyHarborDbContext _context;
-		IFileStorageService _fileStorageService;
 
-		public GetPrivateChatsByUsernameQueryHandler(IHobbyHarborDbContext context, IFileStorageService storageService)
+		public GetPrivateChatsByUsernameQueryHandler(IHobbyHarborDbContext context)
 		{
 			_context = context;
-			_fileStorageService = storageService;
 		}
 
 		public async Task<ICollection<PrivateChat>> Handle(GetPrivateChatsByUsername request, CancellationToken cancellationToken)
 		{
-			IQueryable<PrivateChat> query = _context.PrivateChats.Where(x => x.Creator.Username == request.Username)
+			IQueryable<PrivateChat> query = _context.PrivateChats.Where(x => 
+				x.Creator.Username == request.Username || x.Companion.Username == request.Username)
 				.Include(x => x.Companion).ThenInclude(x => x.Profile).ThenInclude(x => x.Images)
 				.Include(x => x.Messages).ThenInclude(x => x.MessageAuthor)
+				.Include(x => x.Messages).ThenInclude(x => x.Replies)
 				.OrderBy(x => x.CompanionId);
 
 			return await query.ToListAsync();

@@ -1,5 +1,5 @@
 ﻿using HobbyHarbor.Application.DTOs;
-using HobbyHarbor.Core.Entities;
+using HobbyHarbor.WebUI.Models;
 
 namespace HobbyHarbor.WebUI.Mapper.MappingProfiles
 {
@@ -7,7 +7,9 @@ namespace HobbyHarbor.WebUI.Mapper.MappingProfiles
 	{
 		public PrivateMessageProfile()
 		{
-			CreateMap<PrivateMessage, PrivateMessageDTO>();
+			CreateMap<PrivateMessageDTO, PrivateMessageViewModel>();
+			CreateMap<PrivateMessageViewModel, PrivateMessageDTO>();
+			CreateMap<PrivateMessageInputModel, PrivateMessageDTO>();
 		}
 	}
 }
