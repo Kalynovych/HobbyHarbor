@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-using HobbyHarbor.Application.DTOs;
+﻿using HobbyHarbor.Application.DTOs;
 using HobbyHarbor.Core.Entities;
 
 namespace HobbyHarbor.Application.Mapper.MappingProfiles
@@ -8,7 +7,10 @@ namespace HobbyHarbor.Application.Mapper.MappingProfiles
 	{
 		public PrivateMessageProfile()
 		{
-			CreateMap<PrivateMessage, PrivateMessageDTO>();
+			CreateMap<PrivateMessage, PrivateMessageDTO>()
+				.IncludeBase<Message, MessageDTO>()
+				.ForMember(dest => dest.CompanionUsername, opt => opt.MapFrom(src => src.PrivateChat.Companion.Username));
+			CreateMap<PrivateMessageDTO, PrivateMessage>();
 		}
 	}
 }

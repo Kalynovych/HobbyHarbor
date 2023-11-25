@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\Models\" />
     <Folder Include="wwwroot\js\" />
   </ItemGroup>
 

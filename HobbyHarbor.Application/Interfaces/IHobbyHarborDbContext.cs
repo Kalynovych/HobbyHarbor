@@ -21,7 +21,11 @@ namespace HobbyHarbor.Application.Interfaces
 
         DbSet<InterestCategory> InterestCategories { get; set; }
 
-        DbSet<PrivateMessage> Messages { get; set; }
+        DbSet<Message> Messages { get; set; }
+
+        DbSet<PrivateMessage> PrivateMessages { get; set; }
+
+        DbSet<PublicMessage> PublicMessages { get; set; }
 
         DbSet<Payment> Payments { get; set; }
 

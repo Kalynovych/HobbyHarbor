@@ -1,7 +1,10 @@
 using HobbyHarbor.Application.Interfaces;
 using HobbyHarbor.Infrastructure;
 using HobbyHarbor.Infrastructure.Data;
+using HobbyHarbor.WebUI;
+using HobbyHarbor.WebUI.Hubs;
 using HobbyHarbor.WebUI.Middlewares;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +14,7 @@ builder.Services.AddControllersWithViews()
 	.AddViewLocalization();
 
 builder.Services.AddHttpClient();
+builder.Services.AddSignalR();
 
 builder.Services.AddStorage(builder.Configuration);
 builder.Services.AddAutoMapper(typeof(Program));
@@ -43,8 +47,10 @@ builder.Services.AddAuthentication(config =>
 
 		config.AccessDeniedPath = "/Home/Index";
 		config.SignedOutCallbackPath = "/Home/Index";
-        config.GetClaimsFromUserInfoEndpoint = true;
+		config.GetClaimsFromUserInfoEndpoint = true;
 	});
+
+builder.Services.AddSingleton<IUserIdProvider, NameUserIdProvider>();
 
 builder.Services.AddLocalization(options =>
 {
@@ -74,6 +80,7 @@ app.UseStaticFiles();
 app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 
 app.UseRouting();
+app.MapHub<PrivateChatHub>("/privateChatHub");
 
 app.UseAuthentication();
 app.UseAuthorization();

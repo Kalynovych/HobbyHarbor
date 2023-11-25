@@ -1,6 +1,4 @@
-﻿using Azure.Identity;
-using Azure.Storage.Blobs;
-using HobbyHarbor.Core.Entities;
+﻿using HobbyHarbor.Core.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -130,15 +128,13 @@ namespace HobbyHarbor.Infrastructure.Data
         {
             builder.Entity<PrivateChat>().HasData(
                 new PrivateChat { CreatorId = 1, CompanionId = 2 },
-                new PrivateChat { CreatorId = 1, CompanionId = 3 },
-                new PrivateChat { CreatorId = 2, CompanionId = 3 });
+                new PrivateChat { CreatorId = 1, CompanionId = 3 });
         }
 
 		private static void SeedPrivateMessages(ModelBuilder builder)
 		{
 			builder.Entity<PrivateMessage>().HasData(
-				new PrivateMessage { Id = 1, AttachmentTypeId = 1, Attachment = "pathToAttachment", CreatorId = 1, 
-                    CompanionId = 2, MessageText = "message1", Time = DateTime.Now, MessageAuthorId = 1 },
+				new PrivateMessage { Id = 1, CreatorId = 1, CompanionId = 2, MessageText = "message1", Time = DateTime.Now, MessageAuthorId = 1 },
 				new PrivateMessage { Id = 2, CreatorId = 1, CompanionId = 2, MessageText = "message2", Time = DateTime.Now, MessageAuthorId = 2, ReplyMessageId = 1 },
 				new PrivateMessage { Id = 3, CreatorId = 1, CompanionId = 2, MessageText = "message3", Time = DateTime.Now, MessageAuthorId = 2 },
 				new PrivateMessage { Id = 4, CreatorId = 1, CompanionId = 3, MessageText = "message4", Time = DateTime.Now, MessageAuthorId = 1 });
@@ -187,7 +183,7 @@ namespace HobbyHarbor.Infrastructure.Data
 		{
 			builder.Entity<PublicMessage>().HasData(
 				new PublicMessage { Id = 5, AttachmentTypeId = 1, Attachment = "pathToAttachment", MessageText = "message1", Time = DateTime.Now, MessageAuthorId = 1, PublicChatId = 1 },
-				new PublicMessage { Id = 6, MessageText = "message2", Time = DateTime.Now, MessageAuthorId = 2, ReplyMessageId = 1, PublicChatId = 1 },
+				new PublicMessage { Id = 6, MessageText = "message2", Time = DateTime.Now, MessageAuthorId = 2, ReplyMessageId = 5, PublicChatId = 1 },
 				new PublicMessage { Id = 7, MessageText = "message3", Time = DateTime.Now, MessageAuthorId = 3, PublicChatId = 1 });
 		}
 

@@ -20,7 +20,7 @@ namespace IdentityServer
 				context.Database.Migrate();
 				if (!context.Clients.Any())
 				{
-					foreach (var client in Configuration.GetClients(config))
+					foreach (var client in Configuration.GetClients())
 					{
 						context.Clients.Add(client.ToEntity());
 					}

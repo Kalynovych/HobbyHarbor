@@ -7,7 +7,7 @@ function onCommentsClick() {
     var postId = $(this).data("postid");
     $.ajax({
         type: "GET",
-        url: "/comments/getComments?postId=" + postId,
+        url: "/comment/getComments?postId=" + postId,
         success: function (result) {
             commentSection.find(".comments-wrapper").html(result);
             $(".comment-replies-button").on("click", onCommentRepliesClick);
@@ -23,7 +23,7 @@ function onCommentRepliesClick() {
     var commentId = $(this).data("commentid");
     $.ajax({
         type: "GET",
-        url: "/comments/getReplies?commentId=" + commentId,
+        url: "/comment/getReplies?commentId=" + commentId,
         success: function (result) {
             replies.html(result);
         },

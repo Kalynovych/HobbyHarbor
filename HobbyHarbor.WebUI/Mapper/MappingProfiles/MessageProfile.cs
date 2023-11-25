@@ -7,7 +7,9 @@ namespace HobbyHarbor.WebUI.Mapper.MappingProfiles
 	{
 		public MessageProfile()
 		{
-			CreateMap<MessageDTO, MessageViewModel>();
+			CreateMap<MessageDTO, MessageViewModel>()
+				.ForMember(dist => dist.Time, opt => opt.MapFrom(src => src.Time.ToShortTimeString()));
+			CreateMap<MessageViewModel, MessageDTO>();
 		}
 	}
 }

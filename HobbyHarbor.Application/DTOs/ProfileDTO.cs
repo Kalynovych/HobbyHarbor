@@ -20,7 +20,7 @@
 
         public DateTime Birthdate { get; set; }
 
-        public string OnlineStatus { get; set; }
+        public DateTime LastActivity { get; set; }
 
         public string? About { get; set; }
 

@@ -1,0 +1,25 @@
+﻿@inject IViewLocalizer _localizer;
+
+<div id="messageSpace" class="message-container"></div>
+<div class="send-message-section hide" id="sendMessageSection">
+	<div class="reply-row hide">
+		<div>
+			<div class="send-reply">@_localizer["ReplyTo"]: </div>
+			<div id="replyTo"></div>
+		</div>
+		<img src="~/images/close.png" onclick="onCancelReplyClick()" />
+	</div>
+	<div class="edit-row hide">
+		<div class="message-edit">@_localizer["EditMessage"]</div>
+		<img src="~/images/close.png" onclick="onCancelEditClick()" />
+	</div>
+	<div class="send-message-inputs">
+		<input type="text" placeholder="Enter message" id="messageInput" />
+		<input type="button" value="Send" id="sendButton" />
+	</div>
+</div>
+
+<div class="message-context-menu hide" id="contextMenu">
+	<div onclick="onEditClick()">@_localizer["Edit"]</div>
+	<div onclick="onDeleteClick()">@_localizer["Delete"]</div>
+</div>

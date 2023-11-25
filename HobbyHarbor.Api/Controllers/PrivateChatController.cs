@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HobbyHarbor.Application.Commands;
 using HobbyHarbor.Application.DTOs;
 using HobbyHarbor.Application.Queries;
 using HobbyHarbor.Core.Entities;
@@ -27,13 +28,12 @@ namespace HobbyHarbor.Api.Controllers
 		public async Task<ActionResult<ICollection<PrivateChatDTO>>> Get([FromRoute] string username)
 		{
 			ICollection<PrivateChat> privateChats = await _mediator.Send(new GetPrivateChatsByUsername { Username = username });
-			ICollection<PrivateChatDTO> privateChatsDTO = _mapper.Map<ICollection<PrivateChatDTO>>(privateChats);
-
-			foreach (var privateChatDTO in privateChatsDTO)
+			if (privateChats == null)
 			{
-				privateChatDTO.LastMessageAuthor = privateChatDTO.LastMessageAuthor == username ? "you:" : "";
+				return NotFound();
 			}
 
+			ICollection<PrivateChatDTO> privateChatsDTO = _mapper.Map<ICollection<PrivateChatDTO>>(privateChats);
 			return Ok(privateChatsDTO);
 		}
 
@@ -44,20 +44,16 @@ namespace HobbyHarbor.Api.Controllers
 			return Ok(new PrivateChatDTO());
 		}
 
-		[HttpPut]
-		[Route("id")]
-		public async Task<ActionResult<PrivateChatDTO>> Put([FromBody] object profile)
-		{
-			//TODO: write put method
-			return Ok(new PrivateChatDTO());
-		}
-
 		[HttpDelete]
-		[Route("{id}")]
-		public async Task<ActionResult<PrivateChatDTO>> Delete([FromRoute] int id)
+		[Route("{creatorId}/{companionId}")]
+		public async Task<ActionResult> Delete([FromRoute] int creatorId, [FromRoute] int companionId)
 		{
-			//TODO: write delete method
-			return Ok(new PrivateChatDTO());
+			PrivateChat privateChat = await _mediator.Send(new GetPrivateChatById { CreatorId = creatorId, CompanionId = companionId });
+			if (privateChat == null)
+				return BadRequest();
+
+			(int, int) result = await _mediator.Send(new DeletePrivateChat { PrivateChat = privateChat });
+			return Ok(result);
 		}
 	}
 }
