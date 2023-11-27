@@ -10,6 +10,8 @@
 
         public ICollection<PublicMessage>? Messages { get; set; }
 
+        public string ChatImage { get; set; }
+
         public string ChatTitle { get; set; }
     }
 }

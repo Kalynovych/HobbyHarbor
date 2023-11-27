@@ -166,9 +166,9 @@ namespace HobbyHarbor.Infrastructure.Data
         private static void SeedPublicChats(ModelBuilder builder)
         {
             builder.Entity<PublicChat>().HasData(
-                new PublicChat { Id = 1, ChatTitle = "title1" },
-                new PublicChat { Id = 2, ChatTitle = "title2" },
-                new PublicChat { Id = 3, ChatTitle = "title3" });
+                new PublicChat { Id = 1, ChatTitle = "title1", ChatImage = "/shared/PublicChatStubImage.png" },
+                new PublicChat { Id = 2, ChatTitle = "title2", ChatImage = "/shared/PublicChatStubImage.png" },
+                new PublicChat { Id = 3, ChatTitle = "title3", ChatImage = "/shared/PublicChatStubImage.png" });
         }
 
         private static void SeedPublicChatInterests(ModelBuilder builder)
@@ -182,7 +182,7 @@ namespace HobbyHarbor.Infrastructure.Data
 		private static void SeedPublicMessages(ModelBuilder builder)
 		{
 			builder.Entity<PublicMessage>().HasData(
-				new PublicMessage { Id = 5, AttachmentTypeId = 1, Attachment = "pathToAttachment", MessageText = "message1", Time = DateTime.Now, MessageAuthorId = 1, PublicChatId = 1 },
+				new PublicMessage { Id = 5, MessageText = "message1", Time = DateTime.Now, MessageAuthorId = 1, PublicChatId = 1 },
 				new PublicMessage { Id = 6, MessageText = "message2", Time = DateTime.Now, MessageAuthorId = 2, ReplyMessageId = 5, PublicChatId = 1 },
 				new PublicMessage { Id = 7, MessageText = "message3", Time = DateTime.Now, MessageAuthorId = 3, PublicChatId = 1 });
 		}

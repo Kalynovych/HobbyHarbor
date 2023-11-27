@@ -13,7 +13,7 @@ namespace HobbyHarbor.Infrastructure.Data.Configuration
             builder.HasOne(x => x.PublicChat)
                 .WithMany(x => x.ChatInterests)
                 .HasForeignKey(x => x.PublicChatId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(x => x.Interest)
                 .WithMany(x => x.PublicChatInterests)

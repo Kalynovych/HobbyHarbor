@@ -13,7 +13,6 @@ namespace HobbyHarbor.Application.Handlers.CommandHandlers
 			_context = context;
 		}
 
-
 		public async Task<(int, int)> Handle(DeletePrivateChat request, CancellationToken cancellationToken)
 		{
 			_context.PrivateChats.Remove(request.PrivateChat);

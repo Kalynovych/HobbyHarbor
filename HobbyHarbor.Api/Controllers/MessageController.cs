@@ -38,7 +38,7 @@ namespace HobbyHarbor.Api.Controllers
 		}
 
 		[HttpGet]
-		[Route("private/{creatorId}/{companionId}")]
+		[Route("private/chat/{creatorId}/{companionId}")]
 		public async Task<ActionResult<ICollection<PrivateMessageDTO>>> GetPrivateMessages([FromRoute] int creatorId, [FromRoute] int companionId)
 		{
 			ICollection<PrivateMessage> messages = await _mediator.Send(new GetPrivateMessagesById { CreatorId = creatorId, CompanionId = companionId });
@@ -50,9 +50,22 @@ namespace HobbyHarbor.Api.Controllers
 			return Ok(_mapper.Map<ICollection<PrivateMessageDTO>>(messages));
 		}
 
+		[HttpGet]
+		[Route("public/chat/{id}")]
+		public async Task<ActionResult<ICollection<PrivateMessageDTO>>> GetPublicMessages([FromRoute] int id)
+		{
+			ICollection<PublicMessage> messages = await _mediator.Send(new GetPublicMessagesById { Id = id });
+			if (messages == null)
+			{
+				return NotFound();
+			}
+
+			return Ok(_mapper.Map<ICollection<PublicMessageDTO>>(messages));
+		}
+
 		[HttpPost]
 		[Route("private")]
-		public async Task<ActionResult<PrivateMessageDTO>> Post([FromBody] object message)
+		public async Task<ActionResult<PrivateMessageDTO>> PostPrivate([FromBody] object message)
 		{
 			PrivateMessageDTO privateMessageDTO = JsonConvert.DeserializeObject<PrivateMessageDTO>(message.ToString());
 			User creator = await _mediator.Send(new GetUserById { Id = privateMessageDTO.CreatorId });
@@ -65,6 +78,23 @@ namespace HobbyHarbor.Api.Controllers
 			PrivateMessage privateMessage = await _mediator.Send(new CreatePrivateMessage { Message = newMessage });
 
 			return Ok(_mapper.Map<PrivateMessageDTO>(privateMessage));
+		}
+
+		[HttpPost]
+		[Route("public")]
+		public async Task<ActionResult<PublicMessageDTO>> PostPublic([FromBody] object message)
+		{
+			PublicMessageDTO publicMessageDTO = JsonConvert.DeserializeObject<PublicMessageDTO>(message.ToString());
+			User author = await _mediator.Send(new GetUserByUsername { Username = publicMessageDTO.AuthorUsername });
+			Message replyTo = await _mediator.Send(new GetMessageById { Id = publicMessageDTO.ReplyMessageId });
+
+			publicMessageDTO.MessageAuthorId = author.Id;
+			PublicMessage newMessage = _mapper.Map<PublicMessage>(publicMessageDTO);
+			newMessage.ReplyTo = replyTo;
+			PublicMessage publicMessage = await _mediator.Send(new CreatePublicMessage { Message = newMessage });
+			publicMessage.PublicChat = await _mediator.Send(new GetPublicChatById { Id = publicMessage.PublicChatId });
+
+			return Ok(_mapper.Map<PublicMessageDTO>(publicMessage));
 		}
 
 		[HttpPut]
@@ -84,17 +114,45 @@ namespace HobbyHarbor.Api.Controllers
 			return Forbid();
 		}
 
-		[HttpDelete]
-		[Route("{id}")]
-		public async Task<ActionResult> Delete([FromRoute] int id)
+		[HttpPut]
+		[Route("public")]
+		public async Task<ActionResult<PublicMessageDTO>> PutPublic([FromBody] object message)
 		{
-			Message message = await _mediator.Send(new GetMessageById { Id = id });
+			PublicMessageDTO publicMessageDTO = JsonConvert.DeserializeObject<PublicMessageDTO>(message.ToString());
+			PublicMessage existingMessage = await _mediator.Send(new GetPublicMessageById { Id = publicMessageDTO.Id });
+
+			if (existingMessage != null && existingMessage.MessageAuthor.Username == publicMessageDTO.AuthorUsername)
+			{
+				existingMessage.MessageText = publicMessageDTO.MessageText;
+				await _mediator.Send(new UpdateMessage { Message = existingMessage });
+				return Ok(_mapper.Map<PublicMessageDTO>(existingMessage));
+			}
+
+			return Forbid();
+		}
+
+		[HttpDelete]
+		[Route("private/{id}")]
+		public async Task<ActionResult<PrivateMessageDTO>> DeletePrivate([FromRoute] int id)
+		{
+			PrivateMessage message = await _mediator.Send(new GetPrivateMessageByMessageId { Id = id });
 			if (message == null)
 				return BadRequest();
 
-			int result = await _mediator.Send(new DeleteMessage { Message = message });
+			await _mediator.Send(new DeleteMessage { Message = message });
+			return Ok(_mapper.Map<PrivateMessageDTO>(message));
+		}
 
-			return Ok(result);
+		[HttpDelete]
+		[Route("public/{id}")]
+		public async Task<ActionResult<PublicMessageDTO>> DeletePublic([FromRoute] int id)
+		{
+			PublicMessage message = await _mediator.Send(new GetPublicMessageById { Id = id });
+			if (message == null)
+				return BadRequest();
+
+			await _mediator.Send(new DeleteMessage { Message = message });
+			return Ok(_mapper.Map<PublicMessageDTO>(message));
 		}
 	}
 }

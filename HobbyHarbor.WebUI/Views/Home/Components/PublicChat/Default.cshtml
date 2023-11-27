@@ -1,0 +1,20 @@
+﻿@inject IViewLocalizer _localizer
+@model PublicChatViewModel
+
+<div class="private-chat-wrapper" data-publicChatId="@Model.Id"
+	onclick="onPublicChatClick('@Model.Id')"
+	oncontextmenu="onPublicChatContextMenu(event, '@Model.Id')">
+	<img class="comment-profile-image" src="data:image/jpg;base64,@Model.ChatImage" alt="@_localizer["ProfileBanner"]" />
+	<div class="private-chat-info">
+		<div class="private-chat-companion">
+			<p>@Model.ChatTitle</p>
+			<p>@Model.LastMessageTime.ToShortTimeString()</p>
+		</div>
+		<div class="private-chat-last-message">
+			@{
+				string prefix = Model.LastMessageAuthor == User.FindFirst("name")?.Value ? _localizer["MessagePrefix"].Value : Model.LastMessageAuthorName;
+				<p>@prefix: @Model.LastMessage</p>
+			}
+		</div>
+	</div>
+</div>

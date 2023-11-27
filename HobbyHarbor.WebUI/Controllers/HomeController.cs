@@ -76,6 +76,21 @@ namespace HobbyHarbor.WebUI.Controllers
 			return View("Error");
 		}
 
+		[Authorize]
+		public async Task<IActionResult> PublicChats()
+		{
+			HttpClient client = await GetAuthorizedClient();
+			var response = await client.GetAsync("publicChats/" + GetUsername());
+			if (response.IsSuccessStatusCode)
+			{
+				var publicChats = await response.Content.ReadFromJsonAsync<ICollection<PublicChatDTO>>();
+
+				return View(_mapper.Map<ICollection<PublicChatViewModel>>(publicChats));
+			}
+
+			return View("Error");
+		}
+
 		public async Task<IActionResult> Login()
 		{
 			return Challenge(new AuthenticationProperties { RedirectUri = "/" });

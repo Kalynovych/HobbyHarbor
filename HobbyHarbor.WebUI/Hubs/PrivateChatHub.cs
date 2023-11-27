@@ -43,6 +43,13 @@ namespace HobbyHarbor.WebUI.Hubs
 		}
 
 		[Authorize]
+		public async Task DeleteMessage(PrivateMessageViewModel message)
+		{
+			string username = Context.User.FindFirst("name")?.Value;
+			await Clients.Users(username, message.CompanionUsername).SendAsync("DeleteMessage", message.Id);
+		}
+
+		[Authorize]
 		public async Task<HttpClient> GetAuthorizedClient()
 		{
 			var accessToken = await Context.GetHttpContext().GetTokenAsync("access_token");

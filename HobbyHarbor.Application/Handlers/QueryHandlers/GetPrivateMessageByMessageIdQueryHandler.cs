@@ -21,6 +21,7 @@ namespace HobbyHarbor.Application.Handlers.QueryHandlers
 				.Include(x => x.MessageAuthor).ThenInclude(x => x.Profile).ThenInclude(x => x.Images)
 				.Include(x => x.PrivateChat).ThenInclude(x => x.Companion)
 				.Include(x => x.ReplyTo)
+				.Include(x => x.Replies)
 				.Include(x => x.AttachmentType);
 
 			return await query.FirstOrDefaultAsync(cancellationToken);

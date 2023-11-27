@@ -21,7 +21,6 @@ namespace HobbyHarbor.Application.Handlers.QueryHandlers
 				x.Creator.Username == request.Username || x.Companion.Username == request.Username)
 				.Include(x => x.Companion).ThenInclude(x => x.Profile).ThenInclude(x => x.Images)
 				.Include(x => x.Messages).ThenInclude(x => x.MessageAuthor)
-				.Include(x => x.Messages).ThenInclude(x => x.Replies)
 				.OrderBy(x => x.CompanionId);
 
 			return await query.ToListAsync();

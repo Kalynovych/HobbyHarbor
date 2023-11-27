@@ -81,6 +81,7 @@ app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocal
 
 app.UseRouting();
 app.MapHub<PrivateChatHub>("/privateChatHub");
+app.MapHub<PublicChatHub>("/publicChatHub");
 
 app.UseAuthentication();
 app.UseAuthorization();
