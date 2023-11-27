@@ -19,8 +19,7 @@ namespace HobbyHarbor.Application.Handlers.QueryHandlers
 		{
 			IQueryable<PrivateChat> query = _context.PrivateChats.Where(x => x.CreatorId == request.CreatorId && x.CompanionId == request.CompanionId)
 				.Include(x => x.Companion).ThenInclude(x => x.Profile).ThenInclude(x => x.Images)
-				.Include(x => x.Messages).ThenInclude(x => x.MessageAuthor)
-				.OrderBy(x => x.CompanionId);
+				.Include(x => x.Messages).ThenInclude(x => x.MessageAuthor);
 
 			return await query.FirstOrDefaultAsync();
 		}
