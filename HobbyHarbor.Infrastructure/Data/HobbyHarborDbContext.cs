@@ -46,7 +46,11 @@ namespace HobbyHarbor.Infrastructure.Data
 
         public DbSet<UsersPublicChat> UsersPublicChats { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+		public DbSet<PostsReaction> PostsReactions { get; set; }
+
+		public DbSet<CommentsReaction> CommentsReactions { get; set; }
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(HobbyHarborDbContext).Assembly);
             modelBuilder.Seed();
