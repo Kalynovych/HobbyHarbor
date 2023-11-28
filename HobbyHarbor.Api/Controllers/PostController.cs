@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
+using HobbyHarbor.Application.Commands;
 using HobbyHarbor.Application.DTOs;
 using HobbyHarbor.Application.Queries;
+using HobbyHarbor.Core.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace HobbyHarbor.Api.Controllers
 {
@@ -32,6 +35,39 @@ namespace HobbyHarbor.Api.Controllers
 			}
 
 			return Ok(_mapper.Map<ICollection<PostDTO>>(posts));
+		}
+
+		[HttpGet]
+		[Route("{id}/reaction/{username}")]
+		public async Task<ActionResult<bool?>> GetReaction([FromRoute] int id, [FromRoute] string username)
+		{
+			bool? reaction = await _mediator.Send(new GetUserPostReaction { Id = id, Username = username });
+
+			return Ok(reaction);
+		}
+
+		[HttpPut]
+		[Route("{id}/reaction/{username}")]
+		public async Task<ActionResult<int>> PutReaction([FromBody] bool value, [FromRoute] int id, [FromRoute] string username)
+		{
+			User user = await _mediator.Send(new GetUserByUsername { Username = username });
+			PostsReaction reaction = new PostsReaction { User = user, UserId = user.Id, PostId = id, IsLiked = value };
+			await _mediator.Send(new UpdateUserPostReaction { PostsReaction = reaction });
+			(int, int) reactions = await _mediator.Send(new GetReactions { PostId = id });
+
+			return Ok(new { likes = reactions.Item1, dislikes = reactions.Item2 });
+		}
+
+		[HttpDelete]
+		[Route("{id}/reaction/{username}")]
+		public async Task<ActionResult<int>> DeleteReaction([FromRoute] int id, [FromRoute] string username)
+		{
+			User user = await _mediator.Send(new GetUserByUsername { Username = username });
+			PostsReaction reaction = new PostsReaction { User = user, UserId = user.Id, PostId = id };
+			await _mediator.Send(new DeleteUserPostReaction { PostsReaction = reaction });
+			(int, int) reactions = await _mediator.Send(new GetReactions { PostId = id });
+
+			return Ok(new { likes = reactions.Item1, dislikes = reactions.Item2 });
 		}
 
 		[HttpPost]

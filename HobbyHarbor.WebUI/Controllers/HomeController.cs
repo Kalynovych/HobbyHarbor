@@ -52,7 +52,14 @@ namespace HobbyHarbor.WebUI.Controllers
 				response = await client.GetAsync("posts/" + user.Id);
 				if (response.IsSuccessStatusCode)
 				{
-					user.Posts = await response.Content.ReadFromJsonAsync<ICollection<PostDTO>>();
+					var posts = await response.Content.ReadFromJsonAsync<ICollection<PostDTO>>();
+					foreach (var post in posts)
+					{
+						post.UserReaction = await GetUserPostReaction(post.Id);
+					}
+
+					user.Posts = posts;
+					
 				}
 
 				return View(_mapper.Map<ProfileViewModel>(user));
@@ -120,6 +127,20 @@ namespace HobbyHarbor.WebUI.Controllers
 		private string GetEmail()
 		{
 			return User.FindFirst("email")?.Value;
+		}
+
+		private async Task<bool?> GetUserPostReaction(int postId)
+		{
+			HttpClient client = await GetAuthorizedClient();
+
+			var response = await client.GetAsync($"posts/{postId}/reaction/{GetUsername()}");
+			bool? reaction = null;
+			if (response.IsSuccessStatusCode)
+			{
+				reaction = await response.Content.ReadFromJsonAsync<bool?>();
+			}
+
+			return reaction;
 		}
 
 		[Authorize]

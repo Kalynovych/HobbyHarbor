@@ -43,6 +43,10 @@ namespace HobbyHarbor.Application.Interfaces
 
         DbSet<UsersPublicChat> UsersPublicChats { get; set; }
 
+        DbSet<PostsReaction> PostsReactions { get; set; }
+
+        DbSet<CommentsReaction> CommentsReactions { get; set; }
+
         int SaveChanges();
 
         Task<int> SaveChangesAsync(CancellationToken token);

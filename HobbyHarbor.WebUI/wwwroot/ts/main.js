@@ -32,4 +32,70 @@ function onCommentRepliesClick() {
         }
     });
 }
+function onPostLikeClick(sender, reaction, postId) {
+    setReaction(sender, reaction, postId, true);
+}
+function onPostDislikeClick(sender, reaction, postId) {
+    setReaction(sender, reaction, postId, false);
+}
+function setReaction(sender, reaction, postId, newReaction) {
+    var likes = sender.parentElement.querySelector(".likes");
+    var dislikes = sender.parentElement.querySelector(".dislikes");
+    if (reaction == "") {
+        putReaction(sender, newReaction, postId);
+        likes.setAttribute('onclick', "onPostLikeClick(this, '".concat(newReaction.toString(), "', ").concat(postId, ")"));
+        dislikes.setAttribute('onclick', "onPostDislikeClick(this, '".concat(newReaction.toString(), "', ").concat(postId, ")"));
+    }
+    else {
+        if (reaction.toLowerCase() == newReaction.toString()) {
+            removeReaction(sender, postId);
+            likes.setAttribute('onclick', "onPostLikeClick(this, '', ".concat(postId, ")"));
+            dislikes.setAttribute('onclick', "onPostDislikeClick(this, '', ".concat(postId, ")"));
+        }
+        else {
+            putReaction(sender, newReaction, postId);
+            likes.setAttribute('onclick', "onPostLikeClick(this, '".concat(newReaction.toString(), "', ").concat(postId, ")"));
+            dislikes.setAttribute('onclick', "onPostDislikeClick(this, '".concat(newReaction.toString(), "', ").concat(postId, ")"));
+        }
+    }
+}
+function setLikesAndDislikes(sender, value) {
+    var response = JSON.parse(value);
+    var likes = sender.parentElement.querySelector(".likes");
+    var dislikes = sender.parentElement.querySelector(".dislikes");
+    likes.querySelector("p").textContent = response.likes;
+    dislikes.querySelector("p").textContent = response.dislikes;
+}
+function removeReaction(sender, postId) {
+    $.ajax({
+        type: "DELETE",
+        url: "/post/deleteReaction?postId=" + parseInt(postId),
+        success: function (result) {
+            setLikesAndDislikes(sender, result);
+            var reacted = sender.querySelector(".reacted");
+            reacted.classList.remove("reacted");
+        },
+        error: function (jqXHR, textStatus, error) {
+            console.log(textStatus);
+        }
+    });
+}
+function putReaction(sender, reaction, postId) {
+    $.ajax({
+        type: "PUT",
+        url: "/post/putReaction",
+        contentType: 'application/json',
+        data: JSON.stringify({ "postId": parseInt(postId), "reaction": reaction }),
+        success: function (result) {
+            setLikesAndDislikes(sender, result);
+            var reacted = sender.parentElement.querySelector(".reacted");
+            if (reacted != null)
+                reacted.classList.remove("reacted");
+            sender.querySelector("p").classList.add("reacted");
+        },
+        error: function (jqXHR, textStatus, error) {
+            console.log(textStatus);
+        }
+    });
+}
 //# sourceMappingURL=main.js.map

@@ -53,13 +53,24 @@
 		</div>
 		<div class="post-bottom">
 			<div class="reaction-container">
-				<div class="reactions">
+
+				@{
+					string like = "", dislike = "";
+					if (Model.UserReaction.HasValue)
+					{
+						bool isLike = Model.UserReaction.Value;
+						like = isLike ? "reacted" : "";
+						dislike = !isLike ? "reacted" : "";
+					}
+				}
+
+				<div class="reactions likes" onclick="onPostLikeClick(this, '@Model.UserReaction', '@Model.Id')">
 					<img src="~/images/like.png" />
-					<p>@Model.Likes</p>
+					<p class="@like">@Model.Likes</p>
 				</div>
-				<div class="reactions">
+				<div class="reactions dislikes" onclick="onPostDislikeClick(this, '@Model.UserReaction', '@Model.Id')">
 					<img src="~/images/Dislike.png" />
-					<p>@Model.Dislikes</p>
+					<p class="@dislike">@Model.Dislikes</p>
 				</div>
 			</div>
 			<p class="post-comment-count" data-postid="@Model.Id">@_localizer["Comments"]: @Model.Comments.Count</p>

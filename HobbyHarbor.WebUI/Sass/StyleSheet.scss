@@ -317,7 +317,17 @@ header {
         font-size: 20px;
         margin: auto;
     }
+
+    &:has(.reacted) {
+        font-weight: bold;
+        border: 1px solid $border-color;
+        border-radius: 10px 10px;
+        padding: 3px;
+        background-color: $additional-color2;
+    }
 }
+
+
 
 .post-comment-count {
     font-size: 20px;
