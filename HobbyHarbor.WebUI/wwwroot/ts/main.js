@@ -1,3 +1,4 @@
+var skipProfiles = 0;
 $(document).ready(function () {
     $(".post-comment-count").on("click", onCommentsClick);
 });
@@ -97,5 +98,54 @@ function putReaction(sender, reaction, postId) {
             console.log(textStatus);
         }
     });
+}
+function nextProfile() {
+    skipProfiles += 1;
+    $.ajax({
+        type: "GET",
+        url: "/profile/getProfile?skip=" + skipProfiles,
+        success: function (result) {
+            $("#profileChoice").html(result);
+        },
+        error: function (jqXHR, textStatus, error) {
+            var newDiv = $("<div>");
+            newDiv.addClass("profile-not-found");
+            newDiv.text("No profile found");
+            $("#profileChoice").replaceWith(newDiv);
+        }
+    });
+}
+function setChoice(target, isLiked) {
+    $.ajax({
+        type: "POST",
+        url: "/profile/postChoice?target=".concat(target, "&isLiked=").concat(isLiked),
+        error: function (jqXHR, textStatus, error) {
+            console.log(textStatus);
+        }
+    });
+}
+function createChat(target) {
+    $.ajax({
+        type: "POST",
+        url: "/chat/createPrivateChat?companionUsername=".concat(target),
+        success: function (result) {
+            window.location.href = '/home/privateChats';
+        },
+        error: function (jqXHR, textStatus, error) {
+            console.log(textStatus);
+        }
+    });
+}
+function onSkipProfileClick(target) {
+    setChoice(target, false);
+    nextProfile();
+}
+function onLikeProfileClick(target) {
+    setChoice(target, true);
+    nextProfile();
+}
+function onSendMessageClick(target) {
+    setChoice(target, true);
+    createChat(target);
 }
 //# sourceMappingURL=main.js.map

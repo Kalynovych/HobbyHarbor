@@ -37,6 +37,32 @@ namespace HobbyHarbor.Api.Controllers
 			return Ok(_mapper.Map<ProfileDTO>(user));
 		}
 
+		[HttpGet]
+		[Route("except/{username}/{skip?}")]
+		public async Task<ActionResult<ProfileDTO>> GetPeople([FromRoute] string username, [FromRoute] int skip = 0)
+		{
+			User user = await _mediator.Send(new GetUser { Except = username, Skip = skip });
+			if (user == null)
+			{
+				return NotFound();
+			}
+
+			return Ok(_mapper.Map<ProfileDTO>(user));
+		}
+
+		[HttpPost]
+		[Route("choice/{user}/{target}")]
+		public async Task<ActionResult> PostChoice([FromBody] bool isLiked, [FromRoute] string user, [FromRoute] string target)
+		{
+			User currentUser = await _mediator.Send(new GetUserByUsername { Username = user });
+			User targetUser = await _mediator.Send(new GetUserByUsername { Username = target });
+
+			UserChoice userChoice = new UserChoice { User = currentUser, Target = targetUser, IsLiked = isLiked, Time = DateTime.Now };
+			await _mediator.Send(new CreateUserChoice { UserChoice = userChoice });
+
+			return Ok();
+		}
+
 		[HttpPost]
 		public async Task<ActionResult<ProfileDTO>> Post([FromBody] object profile)
 		{

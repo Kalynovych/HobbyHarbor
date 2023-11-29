@@ -6,6 +6,7 @@ using HobbyHarbor.Core.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace HobbyHarbor.Api.Controllers
 {
@@ -38,10 +39,21 @@ namespace HobbyHarbor.Api.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult<PrivateChatDTO>> Post([FromBody] object profile)
+		public async Task<ActionResult<PrivateChatDTO>> Post([FromBody] object chat)
 		{
-			//TODO: write post method
-			return Ok(new PrivateChatDTO());
+			PrivateChatDTO privateChatDTO = JsonConvert.DeserializeObject<PrivateChatDTO>(chat.ToString());
+			User creator = await _mediator.Send(new GetUserByUsername { Username = privateChatDTO.CreatorUsername });
+			User companion = await _mediator.Send(new GetUserByUsername { Username = privateChatDTO.CompanionUsername });
+
+			if (creator != null && companion != null)
+			{
+				PrivateChat privateChat = new PrivateChat { Creator = creator, Companion = companion };
+				PrivateChat newPrivateChat = await _mediator.Send(new CreatePrivateChat { PrivateChat = privateChat });
+
+				return Ok(_mapper.Map<PrivateChatDTO>(newPrivateChat));
+			}
+
+			return Forbid();
 		}
 
 		[HttpDelete]

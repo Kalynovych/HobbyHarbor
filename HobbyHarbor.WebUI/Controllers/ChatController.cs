@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HobbyHarbor.Application.DTOs;
 using IdentityModel.Client;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -13,6 +14,25 @@ namespace HobbyHarbor.WebUI.Controllers
 		public ChatController(IMapper mapper)
 		{
 			_mapper = mapper;
+		}
+
+		[HttpPost]
+		[Authorize]
+		public async Task<IActionResult> CreatePrivateChat([FromQuery] string companionUsername)
+		{
+			HttpClient client = await GetAuthorizedClient();
+
+			string creatorUsername = User.FindFirst("name")?.Value;
+			PrivateChatDTO privateChatDTO = new PrivateChatDTO { CreatorUsername = creatorUsername, CompanionUsername = companionUsername };
+			var response = await client.PostAsJsonAsync($"privateChats", privateChatDTO);
+			if (response.IsSuccessStatusCode)
+			{
+				var privateChat = await response.Content.ReadAsStringAsync();
+				return Ok(privateChat);
+			}
+
+			return StatusCode((int)response.StatusCode);
+
 		}
 
 		[HttpDelete]

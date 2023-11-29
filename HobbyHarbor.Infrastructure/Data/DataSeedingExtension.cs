@@ -30,15 +30,15 @@ namespace HobbyHarbor.Infrastructure.Data
             SeedPosts(builder);
             SeedPostInterests(builder);
             SeedPostReactions(builder);
-            SeedPrivateChats(builder);
-			SeedPrivateMessages(builder);
+            //SeedPrivateChats(builder);
+			//SeedPrivateMessages(builder);
 			SeedProfiles(builder);
             SeedProfileImages(builder);
             SeedPublicChats(builder);
             SeedPublicChatInterests(builder);
             SeedPublicMessages(builder);
             SeedUsers(builder);
-            SeedUserChoices(builder);
+            //SeedUserChoices(builder);
             SeedUserInterests(builder);
             SeedUsersPublicChats(builder);
         }
@@ -160,8 +160,13 @@ namespace HobbyHarbor.Infrastructure.Data
 				new ProfileImage { Id = 5, ProfileId = 1, Image = "/shared/ProfileStubImage.jpg" },
 				new ProfileImage { Id = 6, ProfileId = 2, Image = "/shared/ProfileStubImage.jpg" },
 				new ProfileImage { Id = 7, ProfileId = 2, Image = "/shared/BannerStubImage.jpg" },
-				new ProfileImage { Id = 8, ProfileId = 3, Image = "/shared/ProfileStubImage.jpg" });
-        }
+				new ProfileImage { Id = 8, ProfileId = 3, Image = "/shared/ProfileStubImage.jpg" },
+                new ProfileImage { Id = 9, ProfileId = 3, Image = "/shared/BannerStubImage.jpg" },
+				new ProfileImage { Id = 10, ProfileId = 4, Image = "/shared/ProfileStubImage.jpg" },
+				new ProfileImage { Id = 11, ProfileId = 4, Image = "/shared/BannerStubImage.jpg" },
+				new ProfileImage { Id = 12, ProfileId = 5, Image = "/shared/ProfileStubImage.jpg" },
+				new ProfileImage { Id = 13, ProfileId = 5, Image = "/shared/BannerStubImage.jpg" });
+		}
 
         private static void SeedPublicChats(ModelBuilder builder)
         {

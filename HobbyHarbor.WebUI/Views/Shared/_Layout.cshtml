@@ -20,7 +20,7 @@
 				<a asp-controller="Home" asp-action="PrivateChats">@_localizer["PrivateChats"]</a>
 				<a asp-controller="Home" asp-action="PublicChats">@_localizer["PublicChats"]</a>
 				<a href="#">@_localizer["Blog"]</a>
-				<a href="#">@_localizer["FindNewPeople"]</a>
+				<a asp-controller="Home" asp-action="FindPeople">@_localizer["FindNewPeople"]</a>
 			</div>
 			<div>
 				@if (User.Identity.IsAuthenticated)

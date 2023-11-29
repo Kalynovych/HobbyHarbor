@@ -9,6 +9,7 @@ namespace HobbyHarbor.Application.Mapper.MappingProfiles
 		public PrivateChatProfile()
 		{
 			CreateMap<PrivateChat, PrivateChatDTO>()
+				.ForMember(dist => dist.CreatorUsername, opt => opt.MapFrom(src => src.Creator.Username))
 				.ForMember(dist => dist.CompanionUsername, opt => opt.MapFrom(src => src.Companion.Username))
 				.ForMember(dist => dist.CompanionName, opt => opt.ConvertUsing<FullNameValueConverter, Profile>(src => src.Companion.Profile))
 				.ForMember(dist => dist.CompanionProfileImage,

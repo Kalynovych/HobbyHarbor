@@ -327,7 +327,18 @@ header {
     }
 }
 
+.profile-not-found {
+    font-size: 35px;
+    text-align: center;
+    margin-top: 20px;
+}
 
+.profile-choice-section {
+    display: flex;
+    background-color: $base-color;
+    justify-content: space-around;
+    padding: 10px;
+}
 
 .post-comment-count {
     font-size: 20px;
