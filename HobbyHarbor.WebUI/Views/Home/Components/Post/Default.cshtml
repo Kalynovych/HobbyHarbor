@@ -1,0 +1,92 @@
+﻿@model PostViewModel
+
+@inject IViewLocalizer _localizer
+
+<div class="post">
+	<div class="post-creator-container">
+		<img class="post-profile-image" src="data:image/jpg;base64,@Model.ProfileImage.Image" />
+		<div class="post-info">
+			<div class="profile-info">
+				<h2 class="profile-name">@Model.Name @Model.Surname</h2>
+				<p>@Model.Username</p>
+				<div class="post-interests-container">
+					@foreach (var interest in Model.PostInterests)
+					{
+						<div class="post-interest">@interest.Title</div>
+					}
+				</div>
+			</div>
+			<p class="post-publication-time">@Model.PublicationTime.ToShortTimeString()</p>
+		</div>
+		<div class="post-dropdown-container">
+			<ul class="post-options-dropdown hide">
+				<li>Edit</li>
+				<li>Delete</li>
+			</ul>
+		</div>
+	</div>
+	<div>
+		<h1 class="post-title">@Model.PostTitle</h1>
+		<div class="post-attachment">
+			@if (Model.Attachment != null)
+			{
+				switch (Model.AttachmentType)
+				{
+					case "image":
+						<img src="data:image/jpg;base64,@Model.Attachment" />
+						break;
+					case "video":
+						<video controls>
+							<source type="video/mp4" src="data:video/mp4;base64,@Model.Attachment">
+						</video>
+						break;
+					case "audio":
+						<audio controls>
+							<source type="audio/mp3" src="data:audio/mp3;base64,@Model.Attachment">
+						</audio>
+						break;
+					default:
+						break;
+				}
+			}
+			<p class="post-content">@Model.PostContent</p>
+		</div>
+		<div class="post-bottom">
+			<div class="reaction-container">
+
+				@{
+					string like = "", dislike = "";
+					if (Model.UserReaction.HasValue)
+					{
+						bool isLike = Model.UserReaction.Value;
+						like = isLike ? "reacted" : "";
+						dislike = !isLike ? "reacted" : "";
+					}
+				}
+
+				<div class="reactions likes" onclick="onPostLikeClick(this, '@Model.UserReaction', '@Model.Id')">
+					<img src="~/images/like.png" />
+					<p class="@like">@Model.Likes</p>
+				</div>
+				<div class="reactions dislikes" onclick="onPostDislikeClick(this, '@Model.UserReaction', '@Model.Id')">
+					<img src="~/images/Dislike.png" />
+					<p class="@dislike">@Model.Dislikes</p>
+				</div>
+			</div>
+			<p class="post-comment-count" data-postid="@Model.Id">@_localizer["Comments"]: @Model.Comments.Count</p>
+		</div>
+		<div class="post-comment-section hide">
+			<form class="post-leave-comment-form">
+				<textarea placeholder="@_localizer["LeaveComment"]"></textarea>
+				<div class="post-leave-comment-buttons">
+					<button>@_localizer["Cancel"]</button>
+					<input type="submit" value="@_localizer["Comment"]" />
+				</div>
+			</form>
+			<div class="comments-wrapper"></div>
+			<div class="post-load-more-wrapper">
+				<button class="post-load-more-button">@_localizer["LoadMore"]</button>
+			</div>
+		</div>
+	</div>
+</div>

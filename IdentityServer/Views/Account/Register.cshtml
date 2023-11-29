@@ -1,0 +1,40 @@
+﻿@using IdentityServer.Models;
+@model RegisterInputModel
+
+<div class="lead">
+	<h1>Register</h1>
+</div>
+
+<div class="row">
+	<div class="col-sm-6 form-wrapper">
+		<div class="card">
+			<div class="card-body">
+				<form asp-controller="Account" asp-action="Register" method="post">
+					<input type="hidden" asp-for="ReturnUrl" />
+					<div class="form-group">
+						<label>Email</label>
+						<input asp-for="Email" class="form-control" placeholder="Email" />
+						<span asp-validation-for="Email"></span>
+					</div>
+					<div class="form-group">
+						<label>Username</label>
+						<input asp-for="Username" class="form-control" placeholder="Username" />
+						<span asp-validation-for="Username"></span>
+					</div>
+					<div class="form-group">
+						<label>Password</label>
+						<input asp-for="Password" class="form-control" placeholder="Password" />
+						<span asp-validation-for="Password"></span>
+					</div>
+					<div class="form-group">
+						<label>Confirm Password</label>
+						<input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm Password" />
+						<span asp-validation-for="ConfirmPassword"></span>
+					</div>
+					<input type="submit" value="Register" class="btn btn-primary" />
+				</form>
+				<a asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl">Back to login</a>
+			</div>
+		</div>
+	</div>
+</div>

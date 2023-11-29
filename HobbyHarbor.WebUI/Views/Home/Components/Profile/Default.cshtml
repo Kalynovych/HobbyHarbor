@@ -1,0 +1,67 @@
+﻿@model ProfileViewModel
+
+@inject IViewLocalizer _localizer
+
+<div class="profile">
+	<section class="profile-section1">
+		<div class="profile-banner-row">
+			<img class="profile-banner-image" src="data:image/jpg;base64,@Model.BannerImage.Image" alt="@_localizer["ProfileBanner"]" />
+			<div class="profile-info-block">
+				<img class="profile-image" src="data:image/jpg;base64,@Model.ProfileImage.Image" alt="@_localizer["ProfileImage"]" />
+				<div class="profile-info">
+					<h2 class="profile-name">@Model.Name @Model.Surname</h2>
+					<p>@Model.Username</p>
+					<p>@Model.OnlineStatus</p>
+					<div class="profile-user-interests">
+						@if (Model.UserInterests != null)
+						{
+							foreach (var interest in Model.UserInterests)
+							{
+								<div class="profile-interest">@interest.Title</div>
+							}
+						}
+					</div>
+				</div>
+			</div>
+			<div class="profile-activity-info">
+				<p>@_localizer["PublicChats"]: @Model.PublicChatsAmount</p>
+				<p>@_localizer["PrivateChats"]: @Model.PrivateChatsAmount</p>
+				<p>@_localizer["PostsWrited"]: @Model.Posts?.Count</p>
+			</div>
+		</div>
+		<div class="profile-details-row">
+			<div class="profile-details">
+				<p>@_localizer["Age"]: @Model.Age</p>
+				<p>@_localizer["Sex"]: @Model.Sex</p>
+				<p>@_localizer["Country"]: @Model.Country</p>
+				<p>@_localizer["DateOfBirth"]: @Model.Birthdate.ToShortDateString()</p>
+			</div>
+			<p class="profile-about">@Model.About</p>
+		</div>
+	</section>
+	@if (Model.GalleryImages != null && Model.GalleryImages.Count > 0)
+	{
+		<section class="profile-section2">
+			<h2>@_localizer["Gallery"]</h2>
+			<div>
+				<button class="profile-gallery-button"><img src="~/images/Left.png" /></button>
+				@foreach (var image in Model.GalleryImages)
+				{
+					<img class="profile-gallery-image" src="data:image/jpg;base64,@image.Image" alt="image" />
+				}
+				<button class="profile-gallery-button"><img src="~/images/Right.png" /></button>
+			</div>
+		</section>
+	}
+	<section class="profile-section3">
+		<div>
+			<button class="post-write-button">@_localizer["WritePost"]</button>
+		</div>
+		<div class="profile-posts">
+			@foreach (var post in Model.Posts)
+			{
+				<vc:post model="post"></vc:post>
+			}
+		</div>
+	</section>
+</div>

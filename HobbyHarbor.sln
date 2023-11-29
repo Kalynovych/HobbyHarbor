@@ -3,15 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HobbyHarbor.WebUI", "HobbyHarbor.WebUI\HobbyHarbor.WebUI.csproj", "{11D71AE0-C093-43F1-8BCC-7428DE599CE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HobbyHarbor.WebUI", "HobbyHarbor.WebUI\HobbyHarbor.WebUI.csproj", "{11D71AE0-C093-43F1-8BCC-7428DE599CE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HobbyHarbor.Core", "HobbyHarbor.Core\HobbyHarbor.Core.csproj", "{4414F781-4E60-45E6-85DB-211D62D8714B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HobbyHarbor.Core", "HobbyHarbor.Core\HobbyHarbor.Core.csproj", "{4414F781-4E60-45E6-85DB-211D62D8714B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HobbyHarbor.Infrastructure", "HobbyHarbor.Infrastructure\HobbyHarbor.Infrastructure.csproj", "{BD4898FF-6EF7-4A9B-A8AF-610935780DF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HobbyHarbor.Infrastructure", "HobbyHarbor.Infrastructure\HobbyHarbor.Infrastructure.csproj", "{BD4898FF-6EF7-4A9B-A8AF-610935780DF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HobbyHarbor.Application", "HobbyHarbor.Application\HobbyHarbor.Application.csproj", "{CA8866BB-5C1D-4263-94D9-1537918EACA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HobbyHarbor.Application", "HobbyHarbor.Application\HobbyHarbor.Application.csproj", "{CA8866BB-5C1D-4263-94D9-1537918EACA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HobbyHarbor.Shared", "HobbyHarbor.Shared\HobbyHarbor.Shared.csproj", "{2F0A1A17-4685-4DAF-AEE3-0C4AEF17F08D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HobbyHarbor.Shared", "HobbyHarbor.Shared\HobbyHarbor.Shared.csproj", "{2F0A1A17-4685-4DAF-AEE3-0C4AEF17F08D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{98768672-9D78-4995-A1A9-B4ABCA2C61EA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HobbyHarbor.Tests", "HobbyHarbor.Tests\HobbyHarbor.Tests.csproj", "{CA12FCF6-0491-4987-A2CE-409AFA26894E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityServer4", "IdentityServer4", "{5A5EB8A7-A2DE-4ABF-8C2C-B2157D7BF4DD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer", "IdentityServer\IdentityServer.csproj", "{14BB523D-F991-4A3B-A0A9-E6DE2E87E51D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HobbyHarbor.Api", "HobbyHarbor.Api\HobbyHarbor.Api.csproj", "{7A339D92-358B-4E84-8A9C-40FA5848065D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,9 +49,25 @@ Global
 		{2F0A1A17-4685-4DAF-AEE3-0C4AEF17F08D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F0A1A17-4685-4DAF-AEE3-0C4AEF17F08D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F0A1A17-4685-4DAF-AEE3-0C4AEF17F08D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA12FCF6-0491-4987-A2CE-409AFA26894E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA12FCF6-0491-4987-A2CE-409AFA26894E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA12FCF6-0491-4987-A2CE-409AFA26894E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA12FCF6-0491-4987-A2CE-409AFA26894E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14BB523D-F991-4A3B-A0A9-E6DE2E87E51D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14BB523D-F991-4A3B-A0A9-E6DE2E87E51D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14BB523D-F991-4A3B-A0A9-E6DE2E87E51D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14BB523D-F991-4A3B-A0A9-E6DE2E87E51D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A339D92-358B-4E84-8A9C-40FA5848065D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A339D92-358B-4E84-8A9C-40FA5848065D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A339D92-358B-4E84-8A9C-40FA5848065D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A339D92-358B-4E84-8A9C-40FA5848065D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CA12FCF6-0491-4987-A2CE-409AFA26894E} = {98768672-9D78-4995-A1A9-B4ABCA2C61EA}
+		{14BB523D-F991-4A3B-A0A9-E6DE2E87E51D} = {5A5EB8A7-A2DE-4ABF-8C2C-B2157D7BF4DD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E52E62ED-F9AB-407B-848E-431A6C0B3C84}

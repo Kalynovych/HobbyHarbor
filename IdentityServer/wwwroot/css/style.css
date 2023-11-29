@@ -1,0 +1,42 @@
+﻿main {
+    display: flex;
+    flex-direction:column;
+}
+
+.lead {
+    margin: auto;
+}
+
+.form-wrapper {
+    margin: auto;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.btn {
+    width: 100px;
+}
+
+.external-label {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.external-button {
+    margin-left: 1rem;
+}
+
+.card {
+    padding-bottom: 1rem;
+}
+
+.external {
+    text-align: center;
+}
+
+span {
+    color: red;
+}
