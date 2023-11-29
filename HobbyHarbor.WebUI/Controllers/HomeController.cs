@@ -7,6 +7,7 @@ using IdentityModel.Client;
 using Microsoft.AspNetCore.Authorization;
 using HobbyHarbor.Application.DTOs;
 using System.Net;
+using HobbyHarbor.Application.Mapper.MappingProfiles;
 
 namespace HobbyHarbor.WebUI.Controllers
 {
@@ -93,6 +94,21 @@ namespace HobbyHarbor.WebUI.Controllers
 				var publicChats = await response.Content.ReadFromJsonAsync<ICollection<PublicChatDTO>>();
 
 				return View(_mapper.Map<ICollection<PublicChatViewModel>>(publicChats));
+			}
+
+			return View("Error");
+		}
+
+		[Authorize]
+		public async Task<IActionResult> FindPeople()
+		{
+			HttpClient client = await GetAuthorizedClient();
+			var response = await client.GetAsync("users/except/" + GetUsername());
+			if (response.IsSuccessStatusCode)
+			{
+				var people = await response.Content.ReadFromJsonAsync<ProfileDTO>();
+
+				return View(_mapper.Map<ProfileViewModel>(people));
 			}
 
 			return View("Error");

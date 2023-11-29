@@ -1,0 +1,42 @@
+﻿@model ProfileViewModel
+
+@inject IViewLocalizer _localizer
+
+<div class="profile">
+	<section class="profile-section1">
+		<div class="profile-banner-row">
+			<img class="profile-banner-image" src="data:image/jpg;base64,@Model.BannerImage.Image" alt="@_localizer["ProfileBanner"]" />
+			<div class="profile-info-block">
+				<img class="profile-image" src="data:image/jpg;base64,@Model.ProfileImage.Image" alt="@_localizer["ProfileImage"]" />
+				<div class="profile-info">
+					<h2 class="profile-name">@Model.Name @Model.Surname</h2>
+					<p>@Model.Username</p>
+					<p>@Model.OnlineStatus</p>
+					<div class="profile-user-interests">
+						@if (Model.UserInterests != null)
+						{
+							foreach (var interest in Model.UserInterests)
+							{
+								<div class="profile-interest">@interest.Title</div>
+							}
+						}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="profile-details-row">
+			<div class="profile-details">
+				<p>@_localizer["Age"]: @Model.Age</p>
+				<p>@_localizer["Sex"]: @Model.Sex</p>
+				<p>@_localizer["Country"]: @Model.Country</p>
+				<p>@_localizer["DateOfBirth"]: @Model.Birthdate.ToShortDateString()</p>
+			</div>
+			<p class="profile-about">@Model.About</p>
+		</div>
+	</section>
+	<section class="profile-choice-section">
+		<img src="~/images/close.png" onclick="onSkipProfileClick('@Model.Username')" />
+		<img src="~/images/likeprofile.png" onclick="onLikeProfileClick('@Model.Username')" />
+		<img src="~/images/sendmessage.png" onclick="onSendMessageClick('@Model.Username')" />
+	</section>
+</div>

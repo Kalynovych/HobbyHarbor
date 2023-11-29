@@ -6,6 +6,8 @@
 
 		public int CompanionId { get; set; }
 
+        public string CreatorUsername { get; set; }
+
 		public string CompanionUsername { get; set; }
 
 		public string CompanionName { get; set; }
